@@ -11,9 +11,12 @@ import {
     Image,
     ImageBackground,
     fontFamily,
-    ScrollView
+    ScrollView,
+    BackHandler,
+    TouchableOpacity
 } from 'react-native';
 import SearchPage from './SearchPage';
+import Page5 from './Page5';
 import {NavigationContainer} from 'react-navigation';
 import Firebase from 'firebase';
 let config = {
@@ -80,11 +83,10 @@ export default class Page4 extends Component<Props> {
         return (
             <View style={styles.whole}>
                 <View style={styles.back}>
-                    <Button 
-                        onPress={this._back}
-                        color='#656565'
-                        title='Back'
-                    />
+                    <TouchableOpacity 
+                        onPress={this._back}>
+                            <Image source={require('./Resources/Back.jpg')} style={styles.buttonimage}/>
+                        </TouchableOpacity>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     <View style={styles.container}>                    
@@ -122,9 +124,10 @@ export default class Page4 extends Component<Props> {
         
     };
 
-    _back=() => {
-        this.props.navigation.navigate({screen: SearchPage})
-    };
+    _back = () => {
+        this.props.navigation.goBack()
+    }
+
    
 }
 
@@ -194,5 +197,10 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingVertical: 20
+    },
+    buttonimage:{
+        height: 30,
+        width: 30,
+        left: 5,
     },
 });
