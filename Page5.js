@@ -49,7 +49,6 @@ export default class Page5 extends Component<Props> {
     constructor() {
         super();
         this.state = {
-          header: 'Kopitiam',
           myText: this.firebasedata,
           background: this.backgroundimage,
           bottomtext: this.btmtext,
