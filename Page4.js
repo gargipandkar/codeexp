@@ -10,8 +10,26 @@ import {
     ActivityIndicator,
     Image,
     ImageBackground,
-    fontFamily
+    fontFamily,
+    ScrollView,
+    BackHandler,
+    TouchableOpacity
 } from 'react-native';
+import SearchPage from './SearchPage';
+import Page5 from './Page5';
+import {NavigationContainer} from 'react-navigation';
+import Firebase from 'firebase';
+let config = {
+  apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
+  authDomain: 'hackathon-4d07b.firebaseio.com',
+  databaseURL: 'hackathon-4d07b.firebaseio.com',
+  projectId: 'hackathon-4d07b',
+  storageBucket: 'hackathon-4d07b.appspot.com',
+  messagingSenderId: 'XXXXXXX'
+};
+let app = Firebase.initializeApp(config);
+export const db = app.database();
+
 
 type Props = {};
 
@@ -20,38 +38,96 @@ export default class Page4 extends Component<Props> {
     static navigationOptions = {
         title: 'Page4',
     }
+
+    readUserData = () => {
+        db.ref('Restaurants/').on('value', (snapshot) => {
+            console.log(snapshot)
+            this.setState({header: snapshot.val().Name})
+            var people = snapshot.val().Data.current
+            var seating = snapshot.val().Data.capacity
+            this.setState({myText: snapshot.val().Data.current})
+            if (people / seating <= 0.5) {
+                this.setState({
+                    background: require('./Resources/Picture1.png'),
+                    bottomtext: 'Low Crowding',
+                    rec: ''
+            })}
+            else if (people / seating < 0.75 && people / seating > 0.5) {
+                this.setState({
+                    background: require('./Resources/Picture2.png'),
+                    bottomtext: 'Medium Crowding',
+                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
+            })}
+            else {
+                this.setState({
+                    background: require('./Resources/Picture3.png'),
+                    bottomtext: 'High Crowding',
+                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
+            })}
+        });
+    }
+
+    constructor() {
+        super()
+        this.state = {
+            header: this.name,
+            myText: this.firebasedata,
+            background: this.backgroundimage,
+            bottomtext: this.btmtext,
+            rec: this.reccom
+        }
+        this.readUserData()
+    }
+
     render() {
         return (
             <View style={styles.whole}>
-                <View style={styles.container}>                    
-                    <Text style={styles.description}>
-                        McDonald's Tiong Bahru
-                        Plaza
-                    </Text>
+                <View style={styles.back}>
+                    <TouchableOpacity 
+                        onPress={this._back}>
+                            <Image source={require('./Resources/Back.jpg')} style={styles.buttonimage}/>
+                        </TouchableOpacity>
                 </View>
+                <ScrollView contentContainerStyle={styles.contentContainer}>
+                    <View style={styles.container}>                    
+                        <Text style={styles.description}>
+                            {this.state.header}
+                        </Text>
+                    </View>
 
-                <View style={styles.info}>
-                    <ImageBackground
-                        source={require('./Resources/Picture1.png')}
-                        style={styles.background}
-                        >
-                        <Text
-                            style={styles.text1}
-                        >
-                            2
+                    <View style={styles.info}>
+                        <ImageBackground
+                            source= {this.state.background}
+                            style={styles.background}
+                            >
+                            <Text
+                                style={styles.text1}>
+                                {this.state.myText}
+                            </Text>
+                            <Text
+                                style={styles.text2}
+                            >
+                                Customers
+                            </Text>
+                        </ImageBackground> 
+                        <Text style={styles.btm}>
+                            {this.state.bottomtext}
                         </Text>
-                        <Text
-                            style={styles.text2}
-                        >
-                            Customers
-                        </Text>
-                    </ImageBackground>    
-                </View>
+                        <Text style={styles.btm}>
+                            {this.state.rec}
+                        </Text> 
+                    </View>
+                </ScrollView>
             </View>
 
             );
         
     };
+
+    _back = () => {
+        this.props.navigation.goBack()
+    }
+
    
 }
 
@@ -68,9 +144,14 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     whole:{
-        padding: 30,
-        marginTop: 30,
+        padding: 5,
+        marginTop: 5,
         alignItems: 'stretch'
+    },
+    back:{
+        padding: 5,
+        marginTop: 5,
+        alignItems: 'flex-start'
     },
     info:{
         padding: 30,
@@ -105,5 +186,21 @@ const styles = StyleSheet.create({
         left: 2,
         alignItems: 'center',
         justifyContent:'center'
-    }
+    },
+    btm:{
+        fontWeight: 'normal',
+        color: 'black',
+        top: 30,
+        fontSize: 20,
+        textAlign: 'center',
+        fontFamily: './Resources/comic.ttf'
+    },
+    contentContainer: {
+        paddingVertical: 20
+    },
+    buttonimage:{
+        height: 30,
+        width: 30,
+        left: 5,
+    },
 });
