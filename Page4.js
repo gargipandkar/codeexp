@@ -19,16 +19,17 @@ import SearchPage from './SearchPage';
 import Page5 from './Page5';
 import {NavigationContainer} from 'react-navigation';
 import Firebase from 'firebase';
-let config = {
-  apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
-  authDomain: 'hackathon-4d07b.firebaseio.com',
-  databaseURL: 'hackathon-4d07b.firebaseio.com',
-  projectId: 'hackathon-4d07b',
-  storageBucket: 'hackathon-4d07b.appspot.com',
-  messagingSenderId: 'XXXXXXX'
-};
-let app = Firebase.initializeApp(config);
-export const db = app.database();
+import {db} from './App';
+// let config = {
+//   apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
+//   authDomain: 'hackathon-4d07b.firebaseio.com',
+//   databaseURL: 'hackathon-4d07b.firebaseio.com',
+//   projectId: 'hackathon-4d07b',
+//   storageBucket: 'hackathon-4d07b.appspot.com',
+//   messagingSenderId: 'XXXXXXX'
+// };
+// let app = Firebase.initializeApp(config);
+// export const this.db = app.database();
 
 
 type Props = {};
@@ -40,26 +41,28 @@ export default class Page4 extends Component<Props> {
     }
 
     readUserData = () => {
-        db.ref('Restaurants/').on('value', (snapshot) => {
+        db.ref('Restaurant/').on('value', (snapshot) => {
             console.log(snapshot)
-            this.setState({header: snapshot.val().Name})
-            var people = snapshot.val().Data.current
-            var seating = snapshot.val().Data.capacity
-            this.setState({myText: snapshot.val().Data.current})
+            var people = snapshot.val()[this.state.header].current
+            var seating = snapshot.val()[this.state.header].capacity
+            this.setState({myText: snapshot.val()[this.state.header].current})
             if (people / seating <= 0.5) {
                 this.setState({
+                    ...this.state,
                     background: require('./Resources/Picture1.png'),
                     bottomtext: 'Low Crowding',
                     rec: ''
             })}
             else if (people / seating < 0.75 && people / seating > 0.5) {
                 this.setState({
+                    ...this.state,
                     background: require('./Resources/Picture2.png'),
                     bottomtext: 'Medium Crowding',
                     rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
             })}
             else {
                 this.setState({
+                    ...this.state,
                     background: require('./Resources/Picture3.png'),
                     bottomtext: 'High Crowding',
                     rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
@@ -70,7 +73,7 @@ export default class Page4 extends Component<Props> {
     constructor() {
         super()
         this.state = {
-            header: this.name,
+            header: 'Kopitiam',
             myText: this.firebasedata,
             background: this.backgroundimage,
             bottomtext: this.btmtext,
@@ -86,10 +89,11 @@ export default class Page4 extends Component<Props> {
                     <TouchableOpacity 
                         onPress={this._back}>
                             <Image source={require('./Resources/Back.jpg')} style={styles.buttonimage}/>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
                 </View>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <View style={styles.container}>                    
+                    <View style={styles.container}> 
+                        <Image source={require('./Resources/ToastBox PLQ.jpg')} style={styles.thumbnail}/>              
                         <Text style={styles.description}>
                             {this.state.header}
                         </Text>
@@ -133,18 +137,19 @@ export default class Page4 extends Component<Props> {
 
 const styles = StyleSheet.create({
     description: {
+        marginTop: 0,
         marginBottom: 10,
         fontSize: 34,
         textAlign: 'center',
         color: '#656565',
     },
     container:{
-        padding: 30,
-        marginTop: 5,
-        alignItems: 'flex-end'
+        padding: 5,
+        marginTop: 0,
+        alignItems: 'center'
     },
     whole:{
-        padding: 5,
+        padding: 0,
         marginTop: 5,
         alignItems: 'stretch'
     },
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     info:{
-        padding: 30,
+        padding: 10,
         marginTop: 5,
         alignItems: 'center'
     },
@@ -196,11 +201,15 @@ const styles = StyleSheet.create({
         fontFamily: './Resources/comic.ttf'
     },
     contentContainer: {
-        paddingVertical: 20
+        paddingVertical: 5
     },
     buttonimage:{
         height: 30,
         width: 30,
         left: 5,
+    },
+    thumbnail:{
+        height: 200,
+        width: 200,
     },
 });
