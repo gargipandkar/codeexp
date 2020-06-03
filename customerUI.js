@@ -31,7 +31,7 @@ export default class customerUI extends Component<Props> {
     }
 
     readUserData = () => {
-        db.ref('Restaurant/').on('value', (snapshot) => {
+        db.ref('Retailers/').on('value', (snapshot) => {
             console.log(snapshot)
             var people = snapshot.val()[this.props.route.params.restaurant].current
             var seating = snapshot.val()[this.props.route.params.restaurant].capacity
@@ -54,7 +54,6 @@ export default class customerUI extends Component<Props> {
             rec: ''
         }
         this.readUserData()
-        this.calculateBackground(props.route.params.people, props.route.params.capacity)
     }
     
     calculateBackground = (people, seating) => {
@@ -120,53 +119,9 @@ export default class customerUI extends Component<Props> {
                     </View>
                 </ScrollView>
             </View>
+        );
+    }
 
-  constructor() {
-    super();
-    this.state = {
-      header: 'Kopitiam',
-      myText: this.firebasedata,
-      background: this.backgroundimage,
-      bottomtext: this.btmtext,
-      rec: this.reccom,
-    };
-    this.readUserData();
-  }
-
-  render() {
-    return (
-      <View style={styles.whole}>
-        <View style={styles.back}>
-          <TouchableOpacity onPress={this._back}>
-            <Image
-              source={require('./Resources/Back.jpg')}
-              style={styles.buttonimage}
-            />
-          </TouchableOpacity>
-        </View>
-        <ScrollView contentContainerStyle={styles.contentContainer}>
-          <View style={styles.container}>
-            <Image
-              source={require('./Resources/ToastBox PLQ.jpg')}
-              style={styles.thumbnail}
-            />
-            <Text style={styles.description}>{this.state.header}</Text>
-          </View>
-
-          <View style={styles.info}>
-            <ImageBackground
-              source={this.state.background}
-              style={styles.background}>
-              <Text style={styles.text1}>{this.state.myText}</Text>
-              <Text style={styles.text2}>Customers</Text>
-            </ImageBackground>
-            <Text style={styles.btm}>{this.state.bottomtext}</Text>
-            <Text style={styles.btm}>{this.state.rec}</Text>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
 
     componentDidMount() {
         this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity)

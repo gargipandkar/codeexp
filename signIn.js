@@ -84,6 +84,11 @@ export default class signIn extends React.Component {
       return (
         <View style={styles.form}>
           <Text>Logged In</Text>
+          <Button onPress={() => this.props.navigation.navigate('Restaurant Info',{
+            restaurant: 'teststore',
+            people: 20,
+            capacity: 30
+          })}>Log Out</Button>
           <Button onPress={() => this.onPressLogOut()}>Log Out</Button>
         </View>
       );

@@ -57,11 +57,11 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Sign In" component={signIn} />
       <Stack.Screen name="Restaurant Info" component={customerUI} />
       <Stack.Screen name="Options" component={c_options} />
       <Stack.Screen name="Store Overview" component={retailerUI} />
-      <Stack.Screen name="Sign Up" component={signUp} />
-      <Stack.Screen name="Sign In" component={signIn} />
+      <Stack.Screen name="Sign Up" component={signUp} />  
     </Stack.Navigator>
   );
 }

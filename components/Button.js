@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-const Button = ({onPress, children}) => {
+export const Button = ({onPress, children}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
       <Text style={styles.text}>{children}</Text>
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-export {Button};

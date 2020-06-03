@@ -26,7 +26,6 @@ class ShopListItem extends Component {
                     return {uri: 'https://gdurl.com/yzPU'}
             }
     }
-  };
 
   render() {
     return (
