@@ -25,7 +25,7 @@ Requires the following peer dependencies installed into local node_module:
 - react-native-elements
 
 ## How to use?
-Step 1:Select 'I am a retailer' or 'I am a consumer'.
+Step 1: Select 'I am a retailer' or 'I am a consumer'.
 
 
 If 'I am a retailer' is selected:
