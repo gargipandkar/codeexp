@@ -18,19 +18,22 @@ export default class signUp extends React.Component {
     errorMessage: null,
   };
 
-  writeUserData(storename, storetype, postalcode, capacity, email, password) {
+  writeUserData(storename, storetype, postalcode, capacity, current, email) {
     firebase
       .database()
-      .ref('Restaurant/')
+      .ref('Retailers/')
       .push({
         storename,
         storetype,
         postalcode,
         capacity,
+        current,
+        email,
       })
       .then(data => {
         //success callback
         console.log('data ', data);
+        this.props.navigation.navigate('Store Overview')
       })
       .catch(error => {
         //error callback
@@ -44,11 +47,12 @@ export default class signUp extends React.Component {
       this.state.storetype,
       this.state.postalcode,
       this.state.capacity,
+      this.state.current,
+      this.state.email,
     );
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password);
-    //.then(() => this.props.navigation.navigate('Page3'))
   };
 
   renderCurrentState() {
@@ -111,6 +115,13 @@ export default class signUp extends React.Component {
         />
         <Button onPress={() => this.handleSignUp()}>Sign Up</Button>
         <Text>{this.state.error}</Text>
+        <View style={styles.noAccount}>
+          <Text style={styles.noAccountText}>
+            Already have an account?
+          </Text>
+          <Button onPress={() => this.props.navigation.navigate('Sign In'
+          )}>Sign Up Now</Button>
+        </View>
       </View>
     );
   }
@@ -130,5 +141,8 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1,
+  },
+  noAccount: {
+    alignItems: 'center'
   },
 });

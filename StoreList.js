@@ -44,7 +44,7 @@ export default class SearchableList extends Component {
   }
 
   searchData(text) {
-    const newData = this.datacopy.filter(item => {
+    const newData = this.state.data.filter(item => {
       const itemData = item.storename.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;

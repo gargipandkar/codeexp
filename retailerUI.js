@@ -17,27 +17,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Button} from 'react-native-elements';
-import {NavigationContainer} from 'react-navigation';
-import {Firebase} from 'firebase';
 import {db} from './App.js';
 import ShopListItem from './ShopListItem';
 
 type Props = {};
 
-export default class Page5 extends Component<Props> {
-  static navigationOptions = {
-    title: 'Page5',
-  };
 
-  readUserData = () => {
-    db.ref('Restaurant/').on('value', snapshot => {
+export default class retailerUI extends Component<Props> {
+    static navigationOptions = {
+        title: 'Store Overview',
+    }
+
+  readUserData = (props) => {
+    db.ref('Retailers/').on('value', snapshot => {
       console.log(snapshot);
       let restaurants = [];
       for (let restaurant in snapshot.val()) {
         let item = {};
-        item.name = restaurant;
+        item.name = snapshot.val()[restaurant].storename;
         item.value = snapshot.val()[restaurant];
-        restaurants.push(item);
+        if (item.value.email == this.props.route.params.email) {restaurants.push(item)};
       }
       this.setState({
         ...this.state,
@@ -46,59 +45,57 @@ export default class Page5 extends Component<Props> {
     });
   };
 
-  constructor() {
-    super();
-    this.state = {
-      myText: this.firebasedata,
-      background: this.backgroundimage,
-      bottomtext: this.btmtext,
-      restaurants: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+          myText: this.firebasedata,
+          background: this.backgroundimage,
+          bottomtext: this.btmtext,
+          restaurants: [],
+        };
+    }
+    render() {
+        return (
+            <View style={styles.whole}>                    
+                <Text style={styles.description}>
+                    Hello, Retailer!
+                </Text>
+                <Text style={styles.welcome}>
+                    Welcome back.
+                </Text>
+                    <FlatList
+                        data={this.state.restaurants}
+                        renderItem={({ item }) => (
+                            <ShopListItem
+                                numberOfPeople={item.value.current}
+                                seating={item.value.capacity}
+                                name={item.name}
+                            />
+                        )}
+                        //Setting the number of column
+                        numColumns={1}
+                        keyExtractor={(item, index) => index.toString()}
+                        height= {450}
+                        padding= {100}
+                    />
+                <View style={styles.back}>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('Welcome')}
+                        title='Log Out'
+                        style={styles.buttons}
+                        type='clear'
+                    />
+                </View>
+            </View>
+        );
+        
     };
-    this.readUserData();
-  }
-  render() {
-    return (
-      <View style={styles.whole}>
-        <Text style={styles.description}>Hello, Retailer!</Text>
-        <Text style={styles.welcome}>Welcome back.</Text>
-        <FlatList
-          data={this.state.restaurants}
-          renderItem={({item}) => (
-            <ShopListItem
-              numberOfPeople={item.value.current}
-              seating={item.value.capacity}
-              name={item.name}
-            />
-          )}
-          //Setting the number of column
-          numColumns={2}
-          keyExtractor={(item, index) => index.toString()}
-          height={350}
-          padding={10}
-        />
-        <View style={styles.back}>
-          <Button
-            onPress={this._onSearchPressed}
-            title="Add New Store"
-            style={styles.buttons}
-            type="clear"
-          />
-          <Button
-            onPress={this._onSearchPressed}
-            title="Refresh"
-            style={styles.buttons}
-            type="clear"
-          />
-          <Button
-            onPress={this._onSearchPressed}
-            title="Log Out"
-            style={styles.buttons}
-            type="clear"
-          />
-        </View>
-      </View>
-    );
-  }
+
+    componentDidMount() {
+        this.readUserData()
+        
+    }
+
 }
 
 const styles = StyleSheet.create({
