@@ -6,7 +6,6 @@ A crowd monitoring mobile application for user to check the level of crowd in a 
 - Andriod Studio
 - Firebase
 
-
 ## Installation
 Ensure that the following dependencies are installed:
 - Node (Node 8.3 or newer) 
@@ -15,8 +14,11 @@ Ensure that the following dependencies are installed:
 - JDK (JDK 8 or newer)
 - Android Studio
 
-### Android Studio
-
-
 ## Additional Requirements
 - Requires react-navigation-stack installed into local node_module
+
+## Tests
+Describe and show how to run the tests with code examples.
+
+## How to use?
+step by step guide to use your project.
