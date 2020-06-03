@@ -81,12 +81,10 @@ export default class signIn extends React.Component {
     }
 
     if (this.state.user !== null) {
-      return (
-        <View style={styles.form}>
-          <Text>Logged In</Text>
-          <Button onPress={() => this.onPressLogOut()}>Log Out</Button>
-        </View>
-      );
+      return (this.props.navigation.navigate('Store Overview', {
+        email: this.state.email
+      })
+      )
     }
 
     return (
