@@ -16,7 +16,7 @@ import {
   BackHandler,
   TouchableOpacity,
 } from 'react-native';
-import SearchPage from './SearchPage';
+import signIn from './signIn';
 import Page5 from './Page5';
 import {NavigationContainer} from 'react-navigation';
 import Firebase from 'firebase';

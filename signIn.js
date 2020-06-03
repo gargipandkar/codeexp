@@ -3,8 +3,9 @@ import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Input} from './components/Input';
 import {Button} from './components/Button';
+import {db} from './App.js';
 
-export default class signUp extends React.Component {
+export default class signIn extends React.Component {
   state = {
     email: '',
     password: '',
@@ -12,15 +13,6 @@ export default class signUp extends React.Component {
     user: null,
     error: '',
   };
-
-  componentWillMount() {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
-      authDomain: 'hackathon-4d07b.firebaseapp.com',
-    };
-
-    firebase.initializeApp(firebaseConfig);
-  }
 
   onPressSignIn() {
     this.setState({
