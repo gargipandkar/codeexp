@@ -1,10 +1,11 @@
 # Crowd Go Where
 A crowd monitoring mobile application for user to check the level of crowd in a store without having to be physically present. 
 
-## Tech/framework used
+## Language/framework used
 - React Native (React Native CLI)
 - Andriod Studio
 - Firebase
+- Javascript
 
 ## Installation
 Ensure that the following dependencies are installed:
@@ -23,3 +24,6 @@ Describe and show how to run the tests with code examples.
 
 ## How to use?
 step by step guide to use your project.
+
+## Disclaimer 
+It is essential to install React Native CLI instead of Expo CLI. This application was built using React Native CLI and will not be able to guarantee the application will function accordingly if otherwise.
