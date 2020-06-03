@@ -1,4 +1,4 @@
-# codeexp
+# Crowd Go Where
 A crowd monitoring mobile application for user to check the level of crowd in a store without having to be physically present. 
 
 ## Tech/framework used
