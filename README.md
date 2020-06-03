@@ -20,9 +20,9 @@ For a thorough guide to set up the development environment, visit [React Native 
 ## Additional Requirements
 Requires the following peer dependencies installed into local node_module:
 - react-navigation-stack 
-- react-native-vector-icons@>6.6.0 
-- typescript@>=2.8.0
-- react-native-elements@2.0.1
+- react-native-vector-icons
+- typescript
+- react-native-elements
 
 ## Tests
 Describe and show how to run the tests with code examples.
