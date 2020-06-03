@@ -12,6 +12,12 @@ import {
   Image,
 } from 'react-native';
 
+import {Button} from 'react-native-elements';
+import {NavigationContainer} from 'react-navigation';
+import {Firebase} from 'firebase';
+import {db} from './App.js';
+import ShopListItem from './ShopListItem'
+
 type Props = {};
 
 export default class Page5 extends Component<Props> {

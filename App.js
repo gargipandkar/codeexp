@@ -7,7 +7,6 @@
  * @flow strict-local
  */
 
-
 'use strict';
 import React, {Component} from 'react';
 import {
