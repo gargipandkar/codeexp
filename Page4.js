@@ -31,9 +31,7 @@ import {db} from './App';
 // let app = Firebase.initializeApp(config);
 // export const this.db = app.database();
 
-
 type Props = {};
-
 
 export default class Page4 extends Component<Props> {
     static navigationOptions = {
@@ -41,6 +39,26 @@ export default class Page4 extends Component<Props> {
     }
 
     readUserData = () => {
+        var listofrec = 'Other store recommendation: \n';
+        var recommendation = db.ref("Restaurant/");
+        recommendation.orderByChild("name").on("child_added", function(data) {
+            const crowdlevelratio = data.val().current / data.val().capacity;
+            var crowdlevel = 'CLOSED';
+            if (crowdlevelratio > 0 && crowdlevelratio <= 0.5 ) {
+                crowdlevel = 'Low Crowding';
+            } else if (crowdlevelratio > 0.5 && crowdlevelratio < 0.75) {
+                crowdlevel = 'Medium Crowding';
+            } else if (crowdlevelratio >= 0.75 && crowdlevelratio < 1) {
+                crowdlevel = 'High Crowding';
+            }
+            console.log(crowdlevelratio); //to check crowdlevelratio in console; can remove
+            console.log('A list of recommendation: '+data.val().name); //can remove
+            if (data.val().name !== 'Kopitiam') { //hardcoding to be replaced!!!
+                listofrec += '\u2B24 ' + data.val().name + ' (status: ' + crowdlevel + ') \n';
+            }
+            console.log(listofrec) //can remove
+        });
+
         db.ref('Restaurant/').on('value', (snapshot) => {
             console.log(snapshot)
             var people = snapshot.val()[this.state.header].current
@@ -58,14 +76,14 @@ export default class Page4 extends Component<Props> {
                     ...this.state,
                     background: require('./Resources/Picture2.png'),
                     bottomtext: 'Medium Crowding',
-                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
+                    rec: listofrec + '\n \n \n \n'
             })}
             else {
                 this.setState({
                     ...this.state,
                     background: require('./Resources/Picture3.png'),
                     bottomtext: 'High Crowding',
-                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
+                    rec: listofrec + '\n \n \n \n'
             })}
         });
     }
@@ -91,7 +109,7 @@ export default class Page4 extends Component<Props> {
                             <Image source={require('./Resources/Back.jpg')} style={styles.buttonimage}/>
                     </TouchableOpacity>
                 </View>
-                <ScrollView contentContainerStyle={styles.contentContainer}>
+                <ScrollView contentContainerStyle={styles.contentContainer} >
                     <View style={styles.container}> 
                         <Image source={require('./Resources/ToastBox PLQ.jpg')} style={styles.thumbnail}/>              
                         <Text style={styles.description}>
@@ -117,10 +135,11 @@ export default class Page4 extends Component<Props> {
                         <Text style={styles.btm}>
                             {this.state.bottomtext}
                         </Text>
-                        <Text style={styles.btm}>
+                        <Text style={styles.btmrec}>
                             {this.state.rec}
                         </Text> 
                     </View>
+                    
                 </ScrollView>
             </View>
 
@@ -198,7 +217,8 @@ const styles = StyleSheet.create({
         top: 30,
         fontSize: 20,
         textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
+        fontFamily: './Resources/comic.ttf',
+        height: 50
     },
     contentContainer: {
         paddingVertical: 5
@@ -212,4 +232,13 @@ const styles = StyleSheet.create({
         height: 200,
         width: 200,
     },
+    btmrec:{
+        fontWeight: 'normal',
+        color: 'black',
+        top: 30,
+        fontSize: 20,
+        textAlign: 'left',
+        fontFamily: './Resources/comic.ttf'
+    },
+    
 });
