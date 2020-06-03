@@ -11,29 +11,36 @@ import {
   TextInput,
 } from 'react-native';
 
-import {db} from './fb.config';
+import {db} from './App';
 
-allretailers = [];
 
-db.ref('/Restaurant')
-  .once('value')
-  .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      //var key=childSnapshot.key;
-      var val = childSnapshot.val();
-      allretailers.push(val);
-    });
-    //this.datacopy=allretailers;
-    //console.log("exist?", this.datacopy);
-  });
+export default class StoreList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      text: '',
+      data: [],
+    };
 
-export default class SearchableList extends Component {
-  state = {
-    isLoading: true,
-    text: '',
-    data: allretailers,
-  };
-  datacopy = allretailers;
+    this.setupFirebaseListener()
+ }
+  setupFirebaseListener = () => {
+    db.ref('/Restaurant')
+      .once('value')
+      .then(function(snapshot) {
+        allretailers = [];
+        snapshot.forEach(function(childSnapshot) {
+          //var key=childSnapshot.key;
+          var val = childSnapshot.val();
+          allretailers.push(val);
+        });
+        this.setState({
+          ...this.state,
+          data: allretailers
+        })
+      });
+ }
 
   componentDidMount() {
     this.setState({isLoading: false});
@@ -44,7 +51,7 @@ export default class SearchableList extends Component {
   }
 
   searchData(text) {
-    const newData = this.datacopy.filter(item => {
+    const newData = this.state.data.filter(item => {
       const itemData = item.storename.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;

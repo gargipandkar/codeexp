@@ -31,7 +31,7 @@ export default class customerUI extends Component<Props> {
     }
 
     readUserData = () => {
-        var listofrec = 'Other store recommendation: \n';
+        var listof = 'Other store recommendation: \n';
         var recommendation = db.ref("Restaurant/");
         recommendation.orderByChild("name").on("child_added", function(data) {
             const crowdlevelratio = data.val().current / data.val().capacity;
@@ -44,7 +44,11 @@ export default class customerUI extends Component<Props> {
                 crowdlevel = 'High Crowding';
             }
             if (data.val().name !== 'Kopitiam' || data.val().name === 'undefined') { //hardcoding to be replaced!!!
-                listofrec += '\u2B24 ' + data.val().name + ' (status: ' + crowdlevel + ') \n';
+                listof += '\u2B24 ' + data.val().name + ' (status: ' + crowdlevel + ') \n';
+                this.setState({
+                    ...this.state,
+                    listofrec: listrec
+                })
             }
         });
 
@@ -68,7 +72,8 @@ export default class customerUI extends Component<Props> {
             myText: '',
             background: {uri: 'https://gdurl.com/Jk9o'},
             bottomtext: '',
-            rec: ''
+            rec: '',
+            listofrec: ''
         }
         this.readUserData()
     }
@@ -87,7 +92,7 @@ export default class customerUI extends Component<Props> {
                 ...this.state,
                 background: {uri: 'https://gdurl.com/Kq4k'},
                 bottomtext: 'Medium Crowding',
-                rec: listofrec + '\n \n \n \n',
+                rec: this.listofrec + '\n \n \n \n',
                 myText: people
         })}
         else {
@@ -95,7 +100,7 @@ export default class customerUI extends Component<Props> {
                 ...this.state,
                 background: {uri: 'https://gdurl.com/yzPU'},
                 bottomtext: 'High Crowding',
-                rec: listofrec + '\n \n \n \n',
+                rec: this.listofrec + '\n \n \n \n',
                 myText: people
             })
         }

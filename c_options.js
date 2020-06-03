@@ -31,7 +31,7 @@ export default class c_options extends Component<Props> {
                 </Text>
                 <View style={styles.whole2}>
                     <Button
-                        onPress={this._back}
+                        onPress={() => this.props.navigation.navigate('Search')}
                         title='SEARCH'
                         style={styles.buttons}
                         type='outline'
@@ -40,24 +40,17 @@ export default class c_options extends Component<Props> {
                         Browse by Category
                     </Text>
                 </View>
-                    <View>
-                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Food')}>
-                            Food
-                        </Button>
-                    </View>
-                    <View>
-                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Beauty/Fashion')}>
-                            Beauty/Fashion
-                        </Button>
-                    </View>
-                    <View>
-                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Household')}>
-                            Household
-                        </Button>
-                    </View>               
+                <View style={{height: 50}}>
+                    <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Food')} title='Food'/>
+                </View>
+                <View style={{height: 51}}>
+                    <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Beauty/Fashion')} title='Beauty/Fashion'/>
+                </View>
+                <View style={{height: 50}}>
+                    <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Household')} title='Household'/>
+                </View>               
             </View>
-
-            );
+        );
         
     };
 
@@ -151,7 +144,8 @@ const styles = StyleSheet.create({
     },
     buttons2:{
         height: 70,
-        width: 70,
+        width: 90,
+        flexGrow: 1,
     },
     column:{
         flexDirection: 'row',

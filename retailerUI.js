@@ -53,8 +53,6 @@ export default class retailerUI extends Component<Props> {
           bottomtext: this.btmtext,
           restaurants: [],
         };
-        this.readUserData()
-        
     }
     render() {
         return (
@@ -82,7 +80,7 @@ export default class retailerUI extends Component<Props> {
                     />
                 <View style={styles.back}>
                     <Button
-                        onPress={this._onSearchPressed}
+                        onPress={() => this.props.navigation.navigate('Welcome')}
                         title='Log Out'
                         style={styles.buttons}
                         type='clear'
@@ -92,6 +90,11 @@ export default class retailerUI extends Component<Props> {
         );
         
     };
+
+    componentDidMount() {
+        this.readUserData()
+        
+    }
 
 }
 

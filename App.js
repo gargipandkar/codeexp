@@ -45,6 +45,8 @@ import Firebase from 'firebase';
 import BrowseCat1 from './BrowseCat1'
 import BrowseCat2 from './BrowseCat2'
 import BrowseCat3 from './BrowseCat3'
+import UpdateProfile from './UpdateProfile'
+import StoreList from './StoreList'
 let config = {
   apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
   authDomain: 'hackathon-4d07b.firebaseio.com',
@@ -70,6 +72,8 @@ function MyStack() {
       <Stack.Screen name="Food" component={BrowseCat1} />
       <Stack.Screen name="Beauty/Fashion" component={BrowseCat2} />
       <Stack.Screen name="Household" component={BrowseCat3} />
+      <Stack.Screen name="Update Profile" component={UpdateProfile} />
+      <Stack.Screen name="Search" component={StoreList} />
     </Stack.Navigator>
   );
 }

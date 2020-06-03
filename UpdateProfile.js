@@ -8,27 +8,29 @@ import {
   StyleSheet,
   Text,
   View,
-  Input,
-  Button,
   Picker,
   ActivityIndicator,
 } from 'react-native';
+import {Input} from './components/Input';
+import {Button} from './components/Button';
+import {db} from './App';
 
-import {db} from './fb.config.js';
-
-export default class SettingsScreen extends Component {
+export default class UpdateProfile extends Component {
   static navigationOptions = {
-    title: 'UpdateProfile',
+    title: 'Update Profile',
   };
 
-  state = {
-    storename: '',
-    capacity: '',
-    category: 'Food',
-    error: '',
-  };
+  constructor(props) {
+      super(props)
+    this.state = {
+        storename: '',
+        capacity: '',
+        category: 'Food',
+        error: '',
+    };
+  }
 
-  onPressUpdate() {
+  onPressUpdate = () => {
     db.ref('/Test/' + {storename})
       .set({
         category: this.state.category,
@@ -37,6 +39,7 @@ export default class SettingsScreen extends Component {
         current: 0,
       })
       .then(() => console.log('Data set'));
+    this.props.navigation.navigate('Store Overview')
   }
 
   render() {
