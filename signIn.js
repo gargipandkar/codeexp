@@ -3,7 +3,6 @@ import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Input} from './components/Input';
 import {Button} from './components/Button';
-import {db} from './App.js';
 
 export default class signIn extends React.Component {
   state = {
