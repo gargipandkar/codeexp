@@ -1,13 +1,15 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import * as firebase from 'firebase';
 import {Input} from './components/Input';
 import {Button} from './components/Button';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default class signUp extends React.Component {
   state = {
     storename: '',
-    storetype: '',
+    storetype: null,
     postalcode: '',
     capacity: '',
     email: '',
@@ -60,6 +62,21 @@ export default class signUp extends React.Component {
 
     return (
       <View style={styles.form}>
+        <DropDownPicker
+          items={[
+            {label: 'Food', value: 'Food'},
+            {label: 'Fashion', value: 'Fashion'},
+            {label: 'Grocery', value: 'Grocery'},
+          ]}
+          defaultNull={this.state.storetype === null}
+          placeholder="Select your store type..."
+          containerStyle={{height: 40, marginBottom: 110}}
+          onChangeItem={storetype => {
+            this.setState({
+              storetype: storetype.value,
+            });
+          }}
+        />
         <Input
           placeholder="Enter your store name..."
           label="Store name"
@@ -67,12 +84,7 @@ export default class signUp extends React.Component {
           value={this.state.storename}
         />
         <Input
-          placeholder="Enter your store type..."
-          label="Store type"
-          onChangeText={storetype => this.setState({storetype})}
-          value={this.state.storetype}
-        />
-        <Input
+          class="off"
           placeholder="Enter your store's postal code..."
           label="Postal code"
           onChangeText={postalcode => this.setState({postalcode})}
