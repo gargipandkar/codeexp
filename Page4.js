@@ -1,20 +1,23 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
-import React, { Component} from 'react'
+import React, {Component} from 'react';
+
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Button,
-    ActivityIndicator,
-    Image,
-    ImageBackground,
-    fontFamily,
-    ScrollView,
-    BackHandler,
-    TouchableOpacity
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  ActivityIndicator,
+  Image,
+  ImageBackground,
+  fontFamily,
+  ScrollView,
+  BackHandler,
+  TouchableOpacity,
 } from 'react-native';
+
 import SearchPage from './SearchPage';
 import Page5 from './Page5';
 import {NavigationContainer} from 'react-navigation';
@@ -25,182 +28,167 @@ let config = {
   databaseURL: 'hackathon-4d07b.firebaseio.com',
   projectId: 'hackathon-4d07b',
   storageBucket: 'hackathon-4d07b.appspot.com',
-  messagingSenderId: 'XXXXXXX'
+  messagingSenderId: 'XXXXXXX',
 };
 let app = Firebase.initializeApp(config);
 export const db = app.database();
 
-
 type Props = {};
 
-
 export default class Page4 extends Component<Props> {
-    static navigationOptions = {
-        title: 'Page4',
-    }
+  static navigationOptions = {
+    title: 'Page4',
+  };
 
-    readUserData = () => {
-        db.ref('Restaurants/').on('value', (snapshot) => {
-            console.log(snapshot)
-            this.setState({header: snapshot.val().Name})
-            var people = snapshot.val().Data.current
-            var seating = snapshot.val().Data.capacity
-            this.setState({myText: snapshot.val().Data.current})
-            if (people / seating <= 0.5) {
-                this.setState({
-                    background: require('./Resources/Picture1.png'),
-                    bottomtext: 'Low Crowding',
-                    rec: ''
-            })}
-            else if (people / seating < 0.75 && people / seating > 0.5) {
-                this.setState({
-                    background: require('./Resources/Picture2.png'),
-                    bottomtext: 'Medium Crowding',
-                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
-            })}
-            else {
-                this.setState({
-                    background: require('./Resources/Picture3.png'),
-                    bottomtext: 'High Crowding',
-                    rec: 'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO '
-            })}
+  readUserData = () => {
+    db.ref('Restaurants/').on('value', snapshot => {
+      console.log(snapshot);
+      this.setState({header: snapshot.val().Name});
+      var people = snapshot.val().Data.current;
+      var seating = snapshot.val().Data.capacity;
+      this.setState({myText: snapshot.val().Data.current});
+      if (people / seating <= 0.5) {
+        this.setState({
+          background: require('./Resources/Picture1.png'),
+          bottomtext: 'Low Crowding',
+          rec: '',
         });
-    }
+      } else if (people / seating < 0.75 && people / seating > 0.5) {
+        this.setState({
+          background: require('./Resources/Picture2.png'),
+          bottomtext: 'Medium Crowding',
+          rec:
+            'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO ',
+        });
+      } else {
+        this.setState({
+          background: require('./Resources/Picture3.png'),
+          bottomtext: 'High Crowding',
+          rec:
+            'THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO THIS IS WHERE THE RECOMMENDATIONS WILL GO ',
+        });
+      }
+    });
+  };
 
-    constructor() {
-        super()
-        this.state = {
-            header: this.name,
-            myText: this.firebasedata,
-            background: this.backgroundimage,
-            bottomtext: this.btmtext,
-            rec: this.reccom
-        }
-        this.readUserData()
-    }
-
-    render() {
-        return (
-            <View style={styles.whole}>
-                <View style={styles.back}>
-                    <TouchableOpacity 
-                        onPress={this._back}>
-                            <Image source={require('./Resources/Back.jpg')} style={styles.buttonimage}/>
-                        </TouchableOpacity>
-                </View>
-                <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <View style={styles.container}>                    
-                        <Text style={styles.description}>
-                            {this.state.header}
-                        </Text>
-                    </View>
-
-                    <View style={styles.info}>
-                        <ImageBackground
-                            source= {this.state.background}
-                            style={styles.background}
-                            >
-                            <Text
-                                style={styles.text1}>
-                                {this.state.myText}
-                            </Text>
-                            <Text
-                                style={styles.text2}
-                            >
-                                Customers
-                            </Text>
-                        </ImageBackground> 
-                        <Text style={styles.btm}>
-                            {this.state.bottomtext}
-                        </Text>
-                        <Text style={styles.btm}>
-                            {this.state.rec}
-                        </Text> 
-                    </View>
-                </ScrollView>
-            </View>
-
-            );
-        
+  constructor() {
+    super();
+    this.state = {
+      header: this.name,
+      myText: this.firebasedata,
+      background: this.backgroundimage,
+      bottomtext: this.btmtext,
+      rec: this.reccom,
     };
+    this.readUserData();
+  }
 
-    _back = () => {
-        this.props.navigation.goBack()
-    }
+  render() {
+    return (
+      <View style={styles.whole}>
+        <View style={styles.back}>
+          <TouchableOpacity onPress={this._back}>
+            <Image
+              source={require('./Resources/Back.jpg')}
+              style={styles.buttonimage}
+            />
+          </TouchableOpacity>
+        </View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.container}>
+            <Text style={styles.description}>{this.state.header}</Text>
+          </View>
 
-   
+          <View style={styles.info}>
+            <ImageBackground
+              source={this.state.background}
+              style={styles.background}>
+              <Text style={styles.text1}>{this.state.myText}</Text>
+              <Text style={styles.text2}>Customers</Text>
+            </ImageBackground>
+            <Text style={styles.btm}>{this.state.bottomtext}</Text>
+            <Text style={styles.btm}>{this.state.rec}</Text>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  _back = () => {
+    this.props.navigation.goBack();
+  };
 }
 
 const styles = StyleSheet.create({
-    description: {
-        marginBottom: 10,
-        fontSize: 34,
-        textAlign: 'center',
-        color: '#656565',
-    },
-    container:{
-        padding: 30,
-        marginTop: 5,
-        alignItems: 'flex-end'
-    },
-    whole:{
-        padding: 5,
-        marginTop: 5,
-        alignItems: 'stretch'
-    },
-    back:{
-        padding: 5,
-        marginTop: 5,
-        alignItems: 'flex-start'
-    },
-    info:{
-        padding: 30,
-        marginTop: 5,
-        alignItems: 'center'
-    },
-    text1:{
-        fontWeight: 'normal',
-        color: 'black',
-        position: 'absolute',
-        bottom: 110,
-        left: 'auto',
-        fontSize: 95,
-        textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
-    },
-    text2:{
-        fontWeight: 'normal',
-        color: 'black',
-        position: 'absolute',
-        bottom: 50,
-        left: 'auto',
-        fontSize: 20,
-        textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
-    },
-    background:{
-        height: 250,
-        width: 250,
-        position: 'relative', // because it's parent
-        top: 2,
-        left: 2,
-        alignItems: 'center',
-        justifyContent:'center'
-    },
-    btm:{
-        fontWeight: 'normal',
-        color: 'black',
-        top: 30,
-        fontSize: 20,
-        textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
-    },
-    contentContainer: {
-        paddingVertical: 20
-    },
-    buttonimage:{
-        height: 30,
-        width: 30,
-        left: 5,
-    },
+  description: {
+    marginBottom: 10,
+    fontSize: 34,
+    textAlign: 'center',
+    color: '#656565',
+  },
+  container: {
+    padding: 30,
+    marginTop: 5,
+    alignItems: 'flex-end',
+  },
+  whole: {
+    padding: 5,
+    marginTop: 5,
+    alignItems: 'stretch',
+  },
+  back: {
+    padding: 5,
+    marginTop: 5,
+    alignItems: 'flex-start',
+  },
+  info: {
+    padding: 30,
+    marginTop: 5,
+    alignItems: 'center',
+  },
+  text1: {
+    fontWeight: 'normal',
+    color: 'black',
+    position: 'absolute',
+    bottom: 110,
+    left: 'auto',
+    fontSize: 95,
+    textAlign: 'center',
+    fontFamily: './Resources/comic.ttf',
+  },
+  text2: {
+    fontWeight: 'normal',
+    color: 'black',
+    position: 'absolute',
+    bottom: 50,
+    left: 'auto',
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: './Resources/comic.ttf',
+  },
+  background: {
+    height: 250,
+    width: 250,
+    position: 'relative', // because it's parent
+    top: 2,
+    left: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btm: {
+    fontWeight: 'normal',
+    color: 'black',
+    top: 30,
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: './Resources/comic.ttf',
+  },
+  contentContainer: {
+    paddingVertical: 20,
+  },
+  buttonimage: {
+    height: 30,
+    width: 30,
+    left: 5,
+  },
 });

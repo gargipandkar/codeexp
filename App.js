@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,24 +7,23 @@
  * @flow strict-local
  */
 
+
 'use strict';
- import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
-  StatusBar
+  StatusBar,
 } from 'react-native';
-import {
-  createStackNavigator,
-} from 'react-navigation-stack';
+
+import {createStackNavigator} from 'react-navigation-stack';
 
 import {createAppContainer} from 'react-navigation';
 
-import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
-
+import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 
 import {
   Header,
@@ -43,11 +43,12 @@ import Page5 from './Page5';
 //   Home: { screen: SearchPage },
 // }));
 
-
-export default createAppContainer(createMaterialBottomTabNavigator({
-  Home: {screen: SearchPage},
-  Settings: {screen:SettingsScreen},
-  Page3: {screen: Page3},
-  Page4: {screen: Page4},
-  Page5: {screen: Page5}
-}));
+export default createAppContainer(
+  createMaterialBottomTabNavigator({
+    Home: {screen: SearchPage},
+    Settings: {screen: SettingsScreen},
+    Page3: {screen: Page3},
+    Page4: {screen: Page4},
+    Page5: {screen: Page5},
+  }),
+);
