@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 
 import {
@@ -10,44 +11,39 @@ import {
   TextInput,
 } from 'react-native';
 
-import { db } from './fb.config'
+import {db} from './fb.config';
 
 export default class SearchableList extends Component {
- 
   state = {
     isLoading: true,
     text: '',
-    data: []
-    
-  }
+    data: [],
+  };
 
   constructor(props) {
     super(props);
-  
-    this.datacopy=[];
+
+    this.datacopy = [];
   }
 
-
   //readUserData = () => {}
-  
+
   componentDidMount() {
-    db
-    .ref('/Restaurant')
-    .once('value')
-    .then(function (snapshot){
-        let allretailers=[];
+    db.ref('/Restaurant')
+      .once('value')
+      .then(function(snapshot) {
+        let allretailers = [];
         snapshot.forEach(childSnapshot => {
-            //var key=childSnapshot.key;
-            var val=childSnapshot.val();
-            allretailers.push(val);
+          //var key=childSnapshot.key;
+          var val = childSnapshot.val();
+          allretailers.push(val);
         });
-        this.datacopy=allretailers;
-       
-        console.log("exist?", this.datacopy);
-        
-    });
-    this.setState({data: this.datacopy, isLoading:false});
-    console.log("data: ", this.state.data, this.datacopy);
+        this.datacopy = allretailers;
+
+        console.log('exist?', this.datacopy);
+      });
+    this.setState({data: this.datacopy, isLoading: false});
+    console.log('data: ', this.state.data, this.datacopy);
   }
 
   GetFlatListItem(name) {
