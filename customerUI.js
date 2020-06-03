@@ -75,6 +75,7 @@ export default class customerUI extends Component<Props> {
             rec: '',
             listofrec: ''
         }
+        console.log(this.props.route.params.restaurant)
         this.readUserData()
     }
     
@@ -146,7 +147,7 @@ export default class customerUI extends Component<Props> {
 
 
     componentDidMount() {
-        this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity)
+        this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity, this.props.route.params.res)
     }
 }
 

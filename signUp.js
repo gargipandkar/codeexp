@@ -33,7 +33,9 @@ export default class signUp extends React.Component {
       .then(data => {
         //success callback
         console.log('data ', data);
-        this.props.navigation.navigate('Store Overview')
+        this.props.navigation.navigate('Store Overview', {
+          email: this.state.email
+        })
       })
       .catch(error => {
         //error callback

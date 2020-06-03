@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
-const category="GROCERY";
-retailerscat3=[];
+const category="FOOD";
+retailerscat1=[];
 
 class BrowseCat3 extends Component {
-
    constructor(props) {
       super(props)
       this.state = {
-         names: retailerscat3, 
+         names: retailerscat1, 
       }
 
       this.setupFirebaseListener()
@@ -20,17 +19,19 @@ class BrowseCat3 extends Component {
          .ref('Retailers/')
          .once('value')
          .then(function(snapshot){
+            retailers3=[]
                snapshot.forEach(function(childSnapshot){
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
                   //console.log(key)
-                  if (val.storetype=='Grocery') {
-                     retailerscat3.push(val);
+                  if (val.storetype=='Food') {
+                     retailers3.push(val);
                   }
-                  //console.log(retailerscat3);
-          
+                  retailerscat3=retailers3;
+                  //console.log(retailerscat1);
+                  
+               });
          });
-      });
    }
    render() {
       return (
@@ -45,7 +46,11 @@ class BrowseCat3 extends Component {
                   {
                      this.state.names.map((item, index) => (
                         <View key = {item.key} style = {styles.item}>
-                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
+                           <Text onPress={() => {this.props.navigation.navigate('Restaurant Info', {
+                              restaurant: item.storename
+                           });}}>
+                              {item.storename}
+                           </Text>
                         </View>
                      ))
                   }
@@ -54,7 +59,14 @@ class BrowseCat3 extends Component {
          </View>
       )
    }
+
+   componentDidMount() {
+      this.setupFirebaseListener()
+   }
 }
+
+
+
 export default BrowseCat3
 
 const styles = StyleSheet.create ({

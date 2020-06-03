@@ -13,7 +13,6 @@ import {
 
 import {db} from './App';
 
-
 export default class StoreList extends Component {
   constructor(props) {
     super(props)
@@ -21,40 +20,44 @@ export default class StoreList extends Component {
       isLoading: true,
       text: '',
       data: [],
+      datacopy: [],
     };
+    this.allretailers=[]
 
     this.setupFirebaseListener()
  }
   setupFirebaseListener = () => {
-    db.ref('/Restaurant')
-      .once('value')
-      .then(function(snapshot) {
-        allretailers = [];
-        snapshot.forEach(function(childSnapshot) {
-          //var key=childSnapshot.key;
-          var val = childSnapshot.val();
-          allretailers.push(val);
-        });
-        this.setState({
-          ...this.state,
-          data: allretailers
-        })
-        //this.datacopy=allretailers;
-        //console.log("exist?", this.datacopy);
+    db.ref('Retailers/').once('value', snapshot => {
+      console.log(snapshot);
+      let restaurants = [];
+      for (let restaurant in snapshot.val()) {
+        let item = snapshot.val()[restaurant].storename
+        restaurants.push(item)
+      }
+      console.log(restaurants)
+      this.setState({
+        ...this.state,
+        data: restaurants,
+        datacopy: restaurants
       });
- }
+    });
+  };
 
   componentDidMount() {
+    console.log(this.allretailers);
     this.setState({isLoading: false});
   }
 
   GetFlatListItem(name) {
-    Alert.alert(name);
+    console.log(name);
+    this.props.navigation.navigate('Restaurant Info', {
+      restaurant: name
+    });
   }
 
   searchData(text) {
-    const newData = this.state.data.filter(item => {
-      const itemData = item.storename.toUpperCase();
+    const newData = this.state.datacopy.filter(item => {
+      const itemData = item.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -103,8 +106,8 @@ export default class StoreList extends Component {
           renderItem={({item}) => (
             <Text
               style={styles.row}
-              onPress={this.GetFlatListItem.bind(this, item.storename)}>
-              {item.storename}
+              onPress={this.GetFlatListItem.bind(this, item)}>
+              {item}
             </Text>
           )}
           style={{marginTop: 10}}

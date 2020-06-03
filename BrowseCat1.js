@@ -19,13 +19,15 @@ class BrowseCat1 extends Component {
          .ref('Retailers/')
          .once('value')
          .then(function(snapshot){
+            retailers1=[]
                snapshot.forEach(function(childSnapshot){
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
                   //console.log(key)
                   if (val.storetype=='Food') {
-                     retailerscat1.push(val);
+                     retailers1.push(val);
                   }
+                  retailerscat1=retailers1;
                   //console.log(retailerscat1);
                   
                });
@@ -44,7 +46,11 @@ class BrowseCat1 extends Component {
                   {
                      this.state.names.map((item, index) => (
                         <View key = {item.key} style = {styles.item}>
-                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
+                           <Text onPress={() => {this.props.navigation.navigate('Restaurant Info', {
+                              restaurant: item.storename
+                           });}}>
+                              {item.storename}
+                           </Text>
                         </View>
                      ))
                   }
@@ -53,7 +59,14 @@ class BrowseCat1 extends Component {
          </View>
       )
    }
+
+   componentDidMount() {
+      this.setupFirebaseListener()
+   }
 }
+
+
+
 export default BrowseCat1
 
 const styles = StyleSheet.create ({

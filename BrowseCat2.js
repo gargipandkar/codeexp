@@ -3,35 +3,35 @@ import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
 const category="FASHION";
-retailerscat2=[];
-
-//console.log(retailerscat2);
+retailerscat1=[];
 
 class BrowseCat2 extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         names: retailerscat2, 
+         names: retailerscat1, 
       }
 
       this.setupFirebaseListener()
    }
    setupFirebaseListener = () => {
       db
-      .ref('Retailers/')
-      .once('value')
-      .then(function(snapshot){
-            snapshot.forEach(function(childSnapshot){
-               //var key=childSnapshot.key;
-               var val=childSnapshot.val();
-               //console.log(key)
-               if (val.storetype=='Fashion') {
-                  retailerscat2.push(val);
-               }
-               //console.log(retailerscat2);
-               
-      });
-  });
+         .ref('Retailers/')
+         .once('value')
+         .then(function(snapshot){
+            retailers2=[]
+               snapshot.forEach(function(childSnapshot){
+                  //var key=childSnapshot.key;
+                  var val=childSnapshot.val();
+                  //console.log(key)
+                  if (val.storetype=='Food') {
+                     retailers2.push(val);
+                  }
+                  retailerscat2=retailers2;
+                  //console.log(retailerscat1);
+                  
+               });
+         });
    }
    render() {
       return (
@@ -46,7 +46,11 @@ class BrowseCat2 extends Component {
                   {
                      this.state.names.map((item, index) => (
                         <View key = {item.key} style = {styles.item}>
-                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
+                           <Text onPress={() => {this.props.navigation.navigate('Restaurant Info', {
+                              restaurant: item.storename
+                           });}}>
+                              {item.storename}
+                           </Text>
                         </View>
                      ))
                   }
@@ -55,7 +59,14 @@ class BrowseCat2 extends Component {
          </View>
       )
    }
+
+   componentDidMount() {
+      this.setupFirebaseListener()
+   }
 }
+
+
+
 export default BrowseCat2
 
 const styles = StyleSheet.create ({
