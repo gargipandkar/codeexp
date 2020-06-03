@@ -31,7 +31,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import SearchPage from './SearchPage';
+import signUp from './signUp';
 import SettingsScreen from './SettingsScreen';
 import Page4 from './Page4';
 import Page5 from './Page5';
@@ -49,7 +49,7 @@ export const db = app.database();
 
 export default createAppContainer(
   createMaterialBottomTabNavigator({
-    Home: {screen: SearchPage},
+    Home: {screen: signUp},
     Settings: {screen: SettingsScreen},
     Page4: {screen: Page4},
     Page5: {screen: Page5},
