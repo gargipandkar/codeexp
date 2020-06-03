@@ -10,7 +10,7 @@ A crowd monitoring mobile application for user to check the level of crowd in a 
 Ensure that the following dependencies are installed:
 - Node (Node 8.3 or newer) 
 - Watchman
-- React Native command line interface, 
+- React Native command line interface
 - JDK (JDK 8 or newer)
 - Android Studio
 
