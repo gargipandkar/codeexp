@@ -1,20 +1,22 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
-import React, { Component} from 'react'
+import React, {Component} from 'react';
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    Button,
-    ActivityIndicator,
-    Image,
-    ImageBackground,
-    fontFamily,
-    ScrollView,
-    BackHandler,
-    TouchableOpacity
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  ActivityIndicator,
+  Image,
+  ImageBackground,
+  fontFamily,
+  ScrollView,
+  BackHandler,
+  TouchableOpacity,
 } from 'react-native';
+import signIn from './signIn';
 import {
     createStackNavigator,
     navigation,
@@ -119,13 +121,52 @@ export default class customerUI extends Component<Props> {
                 </ScrollView>
             </View>
 
-            );
-        
+  constructor() {
+    super();
+    this.state = {
+      header: 'Kopitiam',
+      myText: this.firebasedata,
+      background: this.backgroundimage,
+      bottomtext: this.btmtext,
+      rec: this.reccom,
     };
+    this.readUserData();
+  }
 
-    _back = () => {
-        this.props.navigation.goBack()
-    }
+  render() {
+    return (
+      <View style={styles.whole}>
+        <View style={styles.back}>
+          <TouchableOpacity onPress={this._back}>
+            <Image
+              source={require('./Resources/Back.jpg')}
+              style={styles.buttonimage}
+            />
+          </TouchableOpacity>
+        </View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+          <View style={styles.container}>
+            <Image
+              source={require('./Resources/ToastBox PLQ.jpg')}
+              style={styles.thumbnail}
+            />
+            <Text style={styles.description}>{this.state.header}</Text>
+          </View>
+
+          <View style={styles.info}>
+            <ImageBackground
+              source={this.state.background}
+              style={styles.background}>
+              <Text style={styles.text1}>{this.state.myText}</Text>
+              <Text style={styles.text2}>Customers</Text>
+            </ImageBackground>
+            <Text style={styles.btm}>{this.state.bottomtext}</Text>
+            <Text style={styles.btm}>{this.state.rec}</Text>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 
     componentDidMount() {
         this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity)

@@ -1,12 +1,7 @@
 'use strict';
 
-import React, { Component} from 'react'
-import {
-    Text,
-    View,
-    ImageBackground,
-    StyleSheet,
-} from 'react-native';
+import React, {Component} from 'react';
+import {Text, View, ImageBackground, StyleSheet} from 'react-native';
 
 class ShopListItem extends Component {
     constructor(props) {
@@ -31,79 +26,69 @@ class ShopListItem extends Component {
                     return {uri: 'https://gdurl.com/yzPU'}
             }
     }
+  };
 
-    render() {
-        return(
-            <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                <Text style={styles.welcome2}>
-                    {this.props.name}
-                </Text>
-                <ImageBackground
-                    source= {this.state.backgroundImage}
-                    style={styles.background}
-                >
-                    <Text
-                        style={styles.text1}>
-                        {this.state.numberOfPeople}
-                    </Text>
-                    <Text
-                        style={styles.text2}
-                    >
-                        Customers
-                    </Text>
-                </ImageBackground>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={{flex: 1, flexDirection: 'column', margin: 1}}>
+        <Text style={styles.welcome2}>{this.props.name}</Text>
+        <ImageBackground
+          source={this.state.backgroundImage}
+          style={styles.background}>
+          <Text style={styles.text1}>{this.state.numberOfPeople}</Text>
+          <Text style={styles.text2}>Customers</Text>
+        </ImageBackground>
+      </View>
+    );
+  }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({
-            numberOfPeople: nextProps.numberOfPeople,
-            backgroundImage: this.getBackgroundImage(nextProps)
-        })
-    }
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState({
+      numberOfPeople: nextProps.numberOfPeople,
+      backgroundImage: this.getBackgroundImage(nextProps),
+    });
+  }
 }
 
 const styles = StyleSheet.create({
-
-    text1:{
-        fontWeight: 'normal',
-        color: 'black',
-        position: 'absolute',
-        bottom: 70,
-        left: 'auto',
-        fontSize: 50,
-        textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
-    },
-    text2:{
-        fontWeight: 'normal',
-        color: 'black',
-        position: 'absolute',
-        bottom: 30,
-        left: 'auto',
-        fontSize: 20,
-        textAlign: 'center',
-        fontFamily: './Resources/comic.ttf'
-    },
-    background:{
-        height: 150,
-        width: 150,
-        position: 'relative', // because it's parent
-        top: 2,
-        left: 20,
-        padding: 20,
-        alignItems: 'center',
-        justifyContent:'center'
-    },
-    welcome2: {
-        marginTop: 0,
-        marginBottom: 10,
-        left: 30,
-        fontSize: 18,
-        textAlign: 'auto',
-        color: '#656565',
-    },
+  text1: {
+    fontWeight: 'normal',
+    color: 'black',
+    position: 'absolute',
+    bottom: 70,
+    left: 'auto',
+    fontSize: 50,
+    textAlign: 'center',
+    fontFamily: './Resources/comic.ttf',
+  },
+  text2: {
+    fontWeight: 'normal',
+    color: 'black',
+    position: 'absolute',
+    bottom: 30,
+    left: 'auto',
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: './Resources/comic.ttf',
+  },
+  background: {
+    height: 150,
+    width: 150,
+    position: 'relative', // because it's parent
+    top: 2,
+    left: 20,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcome2: {
+    marginTop: 0,
+    marginBottom: 10,
+    left: 30,
+    fontSize: 18,
+    textAlign: 'auto',
+    color: '#656565',
+  },
 });
 
-export default ShopListItem
+export default ShopListItem;
