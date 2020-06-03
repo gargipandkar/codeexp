@@ -111,8 +111,7 @@ export default class customerUI extends Component<Props> {
         return (
             <View style={styles.whole}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <View style={styles.container}> 
-                        <Image source={{uri: 'https://gdurl.com/fL2h'}} style={styles.thumbnail}/>              
+                    <View style={styles.container}>            
                         <Text style={styles.description}>
                             {this.props.route.params.restaurant}
                         </Text>
