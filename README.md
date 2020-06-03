@@ -18,7 +18,11 @@ Ensure that the following dependencies are installed:
 For a thorough guide to set up the development environment, visit [React Native website](https://reactnative.dev/docs/environment-setup) under React Native CLI and android as target OS.
 
 ## Additional Requirements
-- Requires react-navigation-stack installed into local node_module
+Requires the following peer dependencies installed into local node_module:
+- react-navigation-stack 
+- react-native-vector-icons@>6.6.0 
+- typescript@>=2.8.0
+- react-native-elements@2.0.1
 
 ## Tests
 Describe and show how to run the tests with code examples.
