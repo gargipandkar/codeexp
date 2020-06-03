@@ -19,13 +19,14 @@ class BrowseCat1 extends Component {
          .ref('Retailers/')
          .once('value')
          .then(function(snapshot){
+               retailers1=[]
                snapshot.forEach(function(childSnapshot){
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
-                  //console.log(key)
                   if (val.storetype=='Food') {
-                     retailerscat1.push(val);
+                     retailers1.push(val);
                   }
+                  retailerscat1=retailers1;
                   //console.log(retailerscat1);
                   
                });
