@@ -37,7 +37,7 @@ export default class Page4 extends Component<Props> {
     static navigationOptions = {
         title: 'Page4',
     }
-
+    
     readUserData = () => {
         var listofrec = 'Other store recommendation: \n';
         var recommendation = db.ref("Restaurant/");
