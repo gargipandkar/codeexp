@@ -11,38 +11,29 @@ import {
   TextInput,
 } from 'react-native';
 
-import {db} from './App';
+import {db} from './fb.config';
 
+allretailers = [];
 
-export default class StoreList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoading: true,
-      text: '',
-      data: [],
-    };
+db.ref('/Restaurant')
+  .once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      //var key=childSnapshot.key;
+      var val = childSnapshot.val();
+      allretailers.push(val);
+    });
+    //this.datacopy=allretailers;
+    //console.log("exist?", this.datacopy);
+  });
 
-    this.setupFirebaseListener()
- }
-  setupFirebaseListener = () => {
-    db.ref('/Restaurant')
-      .once('value')
-      .then(function(snapshot) {
-        allretailers = [];
-        snapshot.forEach(function(childSnapshot) {
-          //var key=childSnapshot.key;
-          var val = childSnapshot.val();
-          allretailers.push(val);
-        });
-        this.setState({
-          ...this.state,
-          data: allretailers
-        })
-        //this.datacopy=allretailers;
-        //console.log("exist?", this.datacopy);
-      });
- }
+export default class SearchableList extends Component {
+  state = {
+    isLoading: true,
+    text: '',
+    data: allretailers,
+  };
+  datacopy = allretailers;
 
   componentDidMount() {
     this.setState({isLoading: false});
