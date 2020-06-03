@@ -38,11 +38,17 @@ import SettingsScreen from './SettingsScreen';
 import Page3 from './Page3';
 import Page4 from './Page4';
 import Page5 from './Page5';
-
-// const App = createAppContainer(createStackNavigator({
-//   Home: { screen: SearchPage },
-// }));
-
+import Firebase from 'firebase';
+let config = {
+apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
+authDomain: 'hackathon-4d07b.firebaseio.com',
+databaseURL: 'hackathon-4d07b.firebaseio.com',
+projectId: 'hackathon-4d07b',
+storageBucket: 'hackathon-4d07b.appspot.com',
+messagingSenderId: 'XXXXXXX'
+};
+let app = Firebase.initializeApp(config);
+export const db = app.database();
 
 export default createAppContainer(createMaterialBottomTabNavigator({
   Home: {screen: SearchPage},
