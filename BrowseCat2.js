@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
-import { db } from './fb.config';
+import { db } from './App';
 
-const category="BEAUTY/FASHION";
+const category="FASHION";
 retailerscat2=[];
-
-db
-  .ref('/Restaurant')
-  .once('value')
-  .then(function(snapshot){
-      snapshot.forEach(function(childSnapshot){
-          //var key=childSnapshot.key;
-          var val=childSnapshot.val();
-          //console.log(key)
-          if (val.category=='beauty/fashion') {
-              retailerscat2.push(val);
-          }
-          //console.log(retailerscat2);
-          
-      });
-  });
 
 //console.log(retailerscat2);
 
-class ScrollViewExample extends Component {
-   state = {
-      names: retailerscat2, 
+class BrowseCat2 extends Component {
+   constructor(props) {
+      super(props)
+      this.state = {
+         names: retailerscat2, 
+      }
+
+      this.setupFirebaseListener()
+   }
+   setupFirebaseListener = () => {
+      db
+      .ref('Retailers/')
+      .once('value')
+      .then(function(snapshot){
+            snapshot.forEach(function(childSnapshot){
+               //var key=childSnapshot.key;
+               var val=childSnapshot.val();
+               //console.log(key)
+               if (val.storetype=='Fashion') {
+                  retailerscat2.push(val);
+               }
+               //console.log(retailerscat2);
+               
+      });
+  });
    }
    render() {
       return (
@@ -39,8 +45,8 @@ class ScrollViewExample extends Component {
                <ScrollView>
                   {
                      this.state.names.map((item, index) => (
-                        <View key = {item.name} style = {styles.item}>
-                           <Text onPress={() => console.log(item.name)}>{item.name}</Text>
+                        <View key = {item.key} style = {styles.item}>
+                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
                         </View>
                      ))
                   }
@@ -50,7 +56,7 @@ class ScrollViewExample extends Component {
       )
    }
 }
-export default ScrollViewExample
+export default BrowseCat2
 
 const styles = StyleSheet.create ({
    header: {
@@ -73,6 +79,6 @@ const styles = StyleSheet.create ({
       margin: 2,
       borderColor: '#2a4944',
       borderWidth: 1,
-      backgroundColor: '#d2f7f1'
+      backgroundColor: '#FFFF'
    }
 })
