@@ -69,7 +69,7 @@ export default class retailerUI extends Component<Props> {
                             <ShopListItem
                                 numberOfPeople={item.value.current}
                                 seating={item.value.capacity}
-                                name={item.name}
+                                name={item.value.storename}
                             />
                         )}
                         //Setting the number of column
