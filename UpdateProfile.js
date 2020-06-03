@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 
-import { db } from './fb.config.js'
+import { db } from './App'
 
 
 export default class SettingsScreen extends Component{
