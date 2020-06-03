@@ -45,8 +45,8 @@ class BrowseCat2 extends Component {
                <ScrollView>
                   {
                      this.state.names.map((item, index) => (
-                        <View key = {item.name} style = {styles.item}>
-                           <Text onPress={() => console.log(item.name)}>{item.name}</Text>
+                        <View key = {item.key} style = {styles.item}>
+                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
                         </View>
                      ))
                   }
