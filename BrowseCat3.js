@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
-import { db } from './fb.config';
+import { db } from './App';
 
 const category="HOUSEHOLD";
 retailerscat3=[];
 
-db
-  .ref('/Restaurant')
-  .once('value')
-  .then(function(snapshot){
-      snapshot.forEach(function(childSnapshot){
-          //var key=childSnapshot.key;
-          var val=childSnapshot.val();
-          //console.log(key)
-          if (val.category=='household') {
-              retailerscat3.push(val);
-          }
-          //console.log(retailerscat3);
+class BrowseCat3 extends Component {
+
+   constructor(props) {
+      super(props)
+      this.state = {
+         names: retailerscat3, 
+      }
+
+      this.setupFirebaseListener()
+   }
+   setupFirebaseListener = () => {
+      db
+         .ref('Retailers/')
+         .once('value')
+         .then(function(snapshot){
+               snapshot.forEach(function(childSnapshot){
+                  //var key=childSnapshot.key;
+                  var val=childSnapshot.val();
+                  //console.log(key)
+                  if (val.storetype=='household') {
+                     retailerscat3.push(val);
+                  }
+                  //console.log(retailerscat3);
           
+         });
       });
-  });
-
-//console.log(retailerscat3);
-
-class ScrollViewExample extends Component {
-   state = {
-      names: retailerscat3, 
    }
    render() {
       return (
@@ -50,7 +55,7 @@ class ScrollViewExample extends Component {
       )
    }
 }
-export default ScrollViewExample
+export default BrowseCat3
 
 const styles = StyleSheet.create ({
    header: {

@@ -29,7 +29,7 @@ export default class retailerUI extends Component<Props> {
     }
 
   readUserData = () => {
-    db.ref('Restaurant/').on('value', snapshot => {
+    db.ref('Retailers/').on('value', snapshot => {
       console.log(snapshot);
       let restaurants = [];
       for (let restaurant in snapshot.val()) {

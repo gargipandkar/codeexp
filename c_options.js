@@ -20,12 +20,6 @@ export default class c_options extends Component<Props> {
     render() {
         return (
             <View style={styles.whole}>
-                <View style={styles.back}>
-                    <TouchableOpacity 
-                        onPress={this._back}>
-                            <Image source={{uri: 'https://gdurl.com/u53H'}} style={styles.buttonimage}/>
-                    </TouchableOpacity>
-                </View>
                 <Text style={styles.description}>
                     Hello, Friend!
                 </Text>
@@ -46,30 +40,21 @@ export default class c_options extends Component<Props> {
                         Browse by Category
                     </Text>
                 </View>
-                <View style={styles.column}>
                     <View>
-                        <TouchableOpacity 
-                            onPress={this._back}>
-                                <Image source={{uri: 'https://gdurl.com/pbBI'}} style={styles.buttonimage2}/>
-                                <Text style={styles.text1}> Food </Text>
-                        </TouchableOpacity>
+                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Food')}>
+                            Food
+                        </Button>
                     </View>
                     <View>
-                        <TouchableOpacity 
-                            onPress={this._back}>
-                                <Image source={{uri: 'https://gdurl.com/pbBI'}} style={styles.buttonimage2}/>
-                                <Text style={styles.text12}> Beauty/
-                                Fashion </Text>
-                        </TouchableOpacity>
+                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Beauty/Fashion')}>
+                            Beauty/Fashion
+                        </Button>
                     </View>
                     <View>
-                        <TouchableOpacity 
-                            onPress={this._back}>
-                                <Image source={{uri: 'https://gdurl.com/pbBI'}} style={styles.buttonimage2}/>
-                                <Text style={styles.text1}> Household </Text>
-                        </TouchableOpacity>
+                        <Button style={styles.buttons2} onPress={() => this.props.navigation.navigate('Household')}>
+                            Household
+                        </Button>
                     </View>               
-                </View>
             </View>
 
             );
@@ -163,6 +148,10 @@ const styles = StyleSheet.create({
         height: 30,
         width: 70,
         alignSelf: 'center'
+    },
+    buttons2:{
+        height: 70,
+        width: 70,
     },
     column:{
         flexDirection: 'row',

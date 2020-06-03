@@ -21,7 +21,7 @@ import {
     createStackNavigator,
     navigation,
   } from '@react-navigation/stack';
-import {App, db} from './App';
+import {db} from './App';
 
 type Props = {};
 

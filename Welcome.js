@@ -7,10 +7,10 @@ export default class Welcome extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Crowd Go Where</Text>
-        <Button onPress={() => Alert.alert('Simple Button pressed')}>
+        <Button onPress={() => this.props.navigation.navigate('Sign In')}>
           I am a retailer
         </Button>
-        <Button onPress={() => Alert.alert('Simple Button pressed')}>
+        <Button onPress={() => this.props.navigation.navigate('Options')}>
           I am a consumer
         </Button>
       </View>
@@ -21,7 +21,7 @@ export default class Welcome extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 60,
+    padding: 50,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,5 +29,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     padding: 70,
+    bottom: 70,
+    textAlign: 'center'
   },
 });

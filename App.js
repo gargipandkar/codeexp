@@ -42,6 +42,9 @@ import retailerUI from './retailerUI';
 import c_options from './c_options';
 import Welcome from './Welcome';
 import Firebase from 'firebase';
+import BrowseCat1 from './BrowseCat1'
+import BrowseCat2 from './BrowseCat2'
+import BrowseCat3 from './BrowseCat3'
 let config = {
   apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
   authDomain: 'hackathon-4d07b.firebaseio.com',
@@ -63,7 +66,10 @@ function MyStack() {
       <Stack.Screen name="Restaurant Info" component={customerUI} />
       <Stack.Screen name="Options" component={c_options} />
       <Stack.Screen name="Store Overview" component={retailerUI} />
-      <Stack.Screen name="Sign Up" component={signUp} />  
+      <Stack.Screen name="Sign Up" component={signUp} />
+      <Stack.Screen name="Food" component={BrowseCat1} />
+      <Stack.Screen name="Beauty/Fashion" component={BrowseCat2} />
+      <Stack.Screen name="Household" component={BrowseCat3} />
     </Stack.Navigator>
   );
 }
