@@ -28,12 +28,17 @@ Requires the following peer dependencies installed into local node_module:
 Step 1:Select 'I am a retailer' or 'I am a consumer'.
 
 If 'I am a retailer' is selected:
-Step 2: Sign your store up. (Email: b@a.com, Password: )
+
+Step 2: Sign your store up.
+
 Step 3: If store is already listed, log in to view your store. (Email: b@a.com, Password: )
 
 If 'I am a consumer' is selected:
-Step 2: Search for a store name. For illustration purpose, search for 'QBHouse'.
-Step 3: Select QBHouse and crowd level will be shown. If crowd level is medium or high, other recommendation will be shown.
+
+Step 2: Search for a store name. For illustration purpose, search for 'teststore'.
+
+Step 3: Select 'teststore' and crowd level will be shown. If crowd level is medium or high, other store recommendation will be shown.
+
 ![alt_text](https://github.com/gargipandkar/codeexp/blob/master/Resources/userguideC.PNG?raw=true)
 
 ## Disclaimer 
