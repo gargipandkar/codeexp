@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   welcome2: {
     marginTop: 0,
     marginBottom: 10,
-    left: 30,
+    left: 58,
     fontSize: 18,
     textAlign: 'auto',
     color: '#656565',

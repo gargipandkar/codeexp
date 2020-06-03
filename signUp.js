@@ -18,7 +18,7 @@ export default class signUp extends React.Component {
     errorMessage: null,
   };
 
-  writeUserData(storename, storetype, postalcode, capacity, current) {
+  writeUserData(storename, storetype, postalcode, capacity, current, email) {
     firebase
       .database()
       .ref('Retailers/')
@@ -28,6 +28,7 @@ export default class signUp extends React.Component {
         postalcode,
         capacity,
         current,
+        email,
       })
       .then(data => {
         //success callback
@@ -47,6 +48,7 @@ export default class signUp extends React.Component {
       this.state.postalcode,
       this.state.capacity,
       this.state.current,
+      this.state.email,
     );
     firebase
       .auth()

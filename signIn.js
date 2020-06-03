@@ -81,7 +81,9 @@ export default class signIn extends React.Component {
     }
 
     if (this.state.user !== null) {
-      return (this.props.navigation.navigate('Store Overview')
+      return (this.props.navigation.navigate('Store Overview', {
+        email: this.state.email
+      })
       )
     }
 

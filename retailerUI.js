@@ -28,15 +28,15 @@ export default class retailerUI extends Component<Props> {
         title: 'Store Overview',
     }
 
-  readUserData = () => {
+  readUserData = (props) => {
     db.ref('Retailers/').on('value', snapshot => {
       console.log(snapshot);
       let restaurants = [];
       for (let restaurant in snapshot.val()) {
         let item = {};
-        item.name = restaurant;
+        item.name = snapshot.val()[restaurant].storename;
         item.value = snapshot.val()[restaurant];
-        restaurants.push(item);
+        if (item.value.email == this.props.route.params.email) {restaurants.push(item)};
       }
       this.setState({
         ...this.state,
@@ -45,8 +45,8 @@ export default class retailerUI extends Component<Props> {
     });
   };
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           myText: this.firebasedata,
           background: this.backgroundimage,
@@ -73,10 +73,10 @@ export default class retailerUI extends Component<Props> {
                             />
                         )}
                         //Setting the number of column
-                        numColumns={2}
+                        numColumns={1}
                         keyExtractor={(item, index) => index.toString()}
                         height= {450}
-                        padding= {10}
+                        padding= {100}
                     />
                 <View style={styles.back}>
                     <Button
