@@ -35,6 +35,7 @@ import signIn from './signIn';
 import signUp from './signUp';
 import Page4 from './Page4';
 import Page5 from './Page5';
+import Welcome from './Welcome';
 import Firebase from 'firebase';
 let config = {
   apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
@@ -49,6 +50,7 @@ export const db = app.database();
 
 export default createAppContainer(
   createMaterialBottomTabNavigator({
+    Welcome: {screen: Welcome},
     signUp: {screen: signUp},
     signIn: {screen: signIn},
     Page4: {screen: Page4},

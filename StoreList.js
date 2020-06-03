@@ -13,31 +13,30 @@ import {
 
 import {db} from './fb.config';
 
-allretailers=[];
+allretailers = [];
 
-db
-.ref('/Restaurant')
-.once('value')
-.then(function (snapshot){
-    snapshot.forEach(function(childSnapshot){
+db.ref('/Restaurant')
+  .once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
       //var key=childSnapshot.key;
-      var val=childSnapshot.val();
+      var val = childSnapshot.val();
       allretailers.push(val);
-      });
+    });
     //this.datacopy=allretailers;
-    //console.log("exist?", this.datacopy);  
+    //console.log("exist?", this.datacopy);
   });
 
 export default class SearchableList extends Component {
   state = {
     isLoading: true,
     text: '',
-    data: allretailers
-  }
-  datacopy=allretailers;
-  
+    data: allretailers,
+  };
+  datacopy = allretailers;
+
   componentDidMount() {
-    this.setState({isLoading:false});
+    this.setState({isLoading: false});
   }
 
   GetFlatListItem(name) {
