@@ -18,17 +18,22 @@
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-a": "^1.0.1",
     "react-native-ble-manager": "^7.2.0",
+    "react-native-dropdown-picker": "^2.1.8",
     "react-native-elements": "^2.0.1",
+    "react-native-firebase": "^5.6.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-ionicons": "^4.6.5",
+    "react-native-material-dropdown": "^0.11.1",
     "react-native-paper": "^2.16.0",
     "react-native-safe-area-context": "^2.0.3",
     "react-native-screens": "^2.8.0",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.3.9",
     "react-navigation-material-bottom-tabs": "^2.2.12",
-    "react-navigation-stack": "^2.5.1"
+    "react-navigation-stack": "^2.5.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.10.0",
