@@ -41,7 +41,5 @@ Step 2: Search for a store name. For illustration purpose, search for 'teststore
 
 Step 3: Select 'teststore' and crowd level will be shown. If crowd level is medium or high, other store recommendation will be shown.
 
-![alt_text](https://github.com/gargipandkar/codeexp/blob/master/Resources/userguideC.PNG?raw=true)
-
 ## Disclaimer 
 It is essential to install React Native CLI instead of Expo CLI. This application was built using React Native CLI and will not be able to guarantee the application will function accordingly if otherwise.
