@@ -10,38 +10,44 @@ import {
   TextInput,
 } from 'react-native';
 
+import { db } from './fb.config'
+
 export default class SearchableList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: true,
-      text: '',
-      data: [],
-    };
-
-    this.arrayholder = [];
+ 
+  state = {
+    isLoading: true,
+    text: '',
+    data: []
+    
   }
 
+  constructor(props) {
+    super(props);
+  
+    this.datacopy=[];
+  }
+
+
+  //readUserData = () => {}
+  
   componentDidMount() {
-    return fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(responseJson => {
-        // console.log(responseJson);
-        this.setState(
-          {
-            isLoading: false,
-            data: responseJson,
-          },
-          () => {
-            // In this block you can do something with new state.
-            this.arrayholder = responseJson;
-          },
-        );
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    db
+    .ref('/Restaurant')
+    .once('value')
+    .then(function (snapshot){
+        let allretailers=[];
+        snapshot.forEach(childSnapshot => {
+            //var key=childSnapshot.key;
+            var val=childSnapshot.val();
+            allretailers.push(val);
+        });
+        this.datacopy=allretailers;
+       
+        console.log("exist?", this.datacopy);
+        
+    });
+    this.setState({data: this.datacopy, isLoading:false});
+    console.log("data: ", this.state.data, this.datacopy);
   }
 
   GetFlatListItem(name) {
@@ -49,7 +55,7 @@ export default class SearchableList extends Component {
   }
 
   searchData(text) {
-    const newData = this.arrayholder.filter(item => {
+    const newData = this.datacopy.filter(item => {
       const itemData = item.name.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
@@ -89,7 +95,7 @@ export default class SearchableList extends Component {
           onChangeText={text => this.searchData(text)}
           value={this.state.text}
           underlineColorAndroid="transparent"
-          placeholder="Search Here"
+          placeholder="Enter store name"
         />
 
         <FlatList
