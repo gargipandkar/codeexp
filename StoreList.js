@@ -26,7 +26,7 @@ export default class StoreList extends Component {
     this.setupFirebaseListener()
  }
   setupFirebaseListener = () => {
-    db.ref('/Restaurant')
+    db.ref('/Retailers')
       .once('value')
       .then(function(snapshot) {
         allretailers = [];
