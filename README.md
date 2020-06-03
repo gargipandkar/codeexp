@@ -24,9 +24,6 @@ Requires the following peer dependencies installed into local node_module:
 - typescript
 - react-native-elements
 
-## Tests
-Describe and show how to run the tests with code examples.
-
 ## How to use?
 step by step guide to use your project.
 ![alt_text](https://github.com/gargipandkar/codeexp/blob/master/Resources/userguideC.PNG?raw=true)
