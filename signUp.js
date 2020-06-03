@@ -33,7 +33,9 @@ export default class signUp extends React.Component {
       .then(data => {
         //success callback
         console.log('data ', data);
-        this.props.navigation.navigate('Store Overview')
+        this.props.navigation.navigate('Store Overview', {
+          email: this.state.email
+        })
       })
       .catch(error => {
         //error callback
@@ -120,7 +122,7 @@ export default class signUp extends React.Component {
             Already have an account?
           </Text>
           <Button onPress={() => this.props.navigation.navigate('Sign In'
-          )}>Sign Up Now</Button>
+          )}>Log In Now</Button>
         </View>
       </View>
     );

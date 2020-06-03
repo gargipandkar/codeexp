@@ -1,5 +1,5 @@
 {
-  "name": "PropertyFinder",
+  "name": "Crowd Go Where",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -22,7 +22,6 @@
     "react-native-ble-manager": "^7.2.0",
     "react-native-dropdown-picker": "^2.1.8",
     "react-native-elements": "^2.0.1",
-    "react-native-firebase": "^5.6.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-ionicons": "^4.6.5",
     "react-native-material-dropdown": "^0.11.1",

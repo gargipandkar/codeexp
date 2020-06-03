@@ -31,7 +31,7 @@ export default class c_options extends Component<Props> {
                 </Text>
                 <View style={styles.whole2}>
                     <Button
-                        onPress={() => this.props.navigation.navigate('Search')}
+                        onPress={() =>this.props.navigation.navigate('Search')}
                         title='SEARCH'
                         style={styles.buttons}
                         type='outline'

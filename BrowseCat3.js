@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
-const category="GROCERY";
-retailerscat3=[];
-
+const category="Household";
 class BrowseCat3 extends Component {
-
    constructor(props) {
       super(props)
       this.state = {
-         names: retailerscat3, 
+         names: [], 
       }
 
       this.setupFirebaseListener()
@@ -19,18 +16,20 @@ class BrowseCat3 extends Component {
       db
          .ref('Retailers/')
          .once('value')
-         .then(function(snapshot){
-               snapshot.forEach(function(childSnapshot){
-                  //var key=childSnapshot.key;
-                  var val=childSnapshot.val();
-                  //console.log(key)
-                  if (val.storetype=='Grocery') {
-                     retailerscat3.push(val);
-                  }
-                  //console.log(retailerscat3);
-          
+         .then((snapshot) => {
+            let retailers = []
+            snapshot.forEach((childSnapshot) => {
+               var val = childSnapshot.val();
+               if (val.storetype == 'Household') {
+                  retailers.push(val);
+               }
+            });
+
+            this.setState({
+               ...this.state,
+               names: retailers,
+            })
          });
-      });
    }
    render() {
       return (
@@ -44,8 +43,17 @@ class BrowseCat3 extends Component {
                <ScrollView>
                   {
                      this.state.names.map((item, index) => (
-                        <View key = {item.key} style = {styles.item}>
-                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
+                        <View 
+                           key={item.key}
+                           style={styles.item} >
+                           <Text
+                              onPress={() => {
+                                 this.props.navigation.navigate('Restaurant Info', {
+                                    restaurant: item.storename
+                                 });
+                              }}>
+                              {item.storename}
+                           </Text>
                         </View>
                      ))
                   }
@@ -54,7 +62,14 @@ class BrowseCat3 extends Component {
          </View>
       )
    }
+
+   componentDidMount() {
+      this.setupFirebaseListener()
+   }
 }
+
+
+
 export default BrowseCat3
 
 const styles = StyleSheet.create ({

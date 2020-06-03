@@ -13,54 +13,57 @@ import {
 
 import {db} from './App';
 
-
 export default class StoreList extends Component {
   constructor(props) {
     super(props)
+    this._isMounted = false;
     this.state = {
       isLoading: true,
       text: '',
       data: [],
     };
+    this.allretailers=[]
 
     this.setupFirebaseListener()
  }
   setupFirebaseListener = () => {
-    db.ref('/Restaurant')
-      .once('value')
-      .then(function(snapshot) {
-        allretailers = [];
-        snapshot.forEach(function(childSnapshot) {
-          //var key=childSnapshot.key;
-          var val = childSnapshot.val();
-          allretailers.push(val);
-        });
-        this.setState({
-          ...this.state,
-          data: allretailers
-        })
-        //this.datacopy=allretailers;
-        //console.log("exist?", this.datacopy);
+    db.ref('Retailers/').once('value', snapshot => {
+      console.log("firebase loaded", snapshot);
+      let restaurants = [];
+      for (let restaurant in snapshot.val()) {
+        let item = snapshot.val()[restaurant].storename
+        restaurants.push(item)
+      }
+      console.log(restaurants)
+      this.setState({
+        ...this.state,
+        data: restaurants,
+        isLoading: false,
       });
- }
+    });
+  };
 
   componentDidMount() {
-    this.setState({isLoading: false});
+    console.log("MOUNTEDDDDDDD", this.allretailers);
+    this._isMounted = true;
+    this.setState({...this.state, isLoading: false});
+    this.setupFirebaseListener()
   }
 
-  GetFlatListItem(name) {
-    Alert.alert(name);
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  itemSelected = (name) => {
+    console.log(name);
+    this.props.navigation.navigate('Restaurant Info', {
+      restaurant: name
+    });
   }
 
   searchData(text) {
-    const newData = this.state.data.filter(item => {
-      const itemData = item.storename.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-
     this.setState({
-      data: newData,
+      ...this.state(),
       text: text,
     });
   }
@@ -97,14 +100,18 @@ export default class StoreList extends Component {
         />
 
         <FlatList
-          data={this.state.data}
+          data={this.state.data.filter(item => {
+              const itemData = item.toUpperCase();
+              return itemData.indexOf(this.state.text.toUpperCase()) > -1;
+            })
+          }
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={this.itemSeparator}
           renderItem={({item}) => (
             <Text
               style={styles.row}
-              onPress={this.GetFlatListItem.bind(this, item.storename)}>
-              {item.storename}
+              onPress={() => this.itemSelected(item)}>
+              {item}
             </Text>
           )}
           style={{marginTop: 10}}

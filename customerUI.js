@@ -75,6 +75,7 @@ export default class customerUI extends Component<Props> {
             rec: '',
             listofrec: ''
         }
+        console.log(this.props.route.params.restaurant)
         this.readUserData()
     }
     
@@ -110,8 +111,7 @@ export default class customerUI extends Component<Props> {
         return (
             <View style={styles.whole}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    <View style={styles.container}> 
-                        <Image source={{uri: 'https://gdurl.com/fL2h'}} style={styles.thumbnail}/>              
+                    <View style={styles.container}>            
                         <Text style={styles.description}>
                             {this.props.route.params.restaurant}
                         </Text>
@@ -146,7 +146,8 @@ export default class customerUI extends Component<Props> {
 
 
     componentDidMount() {
-        this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity)
+        this.calculateBackground(this.props.route.params.people, this.props.route.params.capacity, this.props.route.params.res)
+        this.readUserData()
     }
 }
 
