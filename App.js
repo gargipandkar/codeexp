@@ -17,7 +17,6 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-
 import {createStackNavigator} from 'react-navigation-stack';
 
 import {createAppContainer} from 'react-navigation';
@@ -32,21 +31,26 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import SearchPage from './SearchPage';
-import SettingsScreen from './SettingsScreen';
-import Page3 from './Page3';
+import signIn from './signIn';
+import signUp from './signUp';
 import Page4 from './Page4';
 import Page5 from './Page5';
-
-// const App = createAppContainer(createStackNavigator({
-//   Home: { screen: SearchPage },
-// }));
+import Firebase from 'firebase';
+let config = {
+  apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
+  authDomain: 'hackathon-4d07b.firebaseio.com',
+  databaseURL: 'hackathon-4d07b.firebaseio.com',
+  projectId: 'hackathon-4d07b',
+  storageBucket: 'hackathon-4d07b.appspot.com',
+  messagingSenderId: 'XXXXXXX',
+};
+let app = Firebase.initializeApp(config);
+export const db = app.database();
 
 export default createAppContainer(
   createMaterialBottomTabNavigator({
-    Home: {screen: SearchPage},
-    Settings: {screen: SettingsScreen},
-    Page3: {screen: Page3},
+    signUp: {screen: signUp},
+    signIn: {screen: signIn},
     Page4: {screen: Page4},
     Page5: {screen: Page5},
   }),
