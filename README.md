@@ -25,6 +25,6 @@ Describe and show how to run the tests with code examples.
 
 ## How to use?
 step by step guide to use your project.
-
+![alt_text](https://github.com/gargipandkar/codeexp/blob/master/Resources/userguideC.PNG?raw=true)
 ## Disclaimer 
 It is essential to install React Native CLI instead of Expo CLI. This application was built using React Native CLI and will not be able to guarantee the application will function accordingly if otherwise.
