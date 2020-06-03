@@ -16,11 +16,11 @@ import {db} from './App';
 export default class StoreList extends Component {
   constructor(props) {
     super(props)
+    this._isMounted = false;
     this.state = {
       isLoading: true,
       text: '',
       data: [],
-      datacopy: [],
     };
     this.allretailers=[]
 
@@ -28,7 +28,7 @@ export default class StoreList extends Component {
  }
   setupFirebaseListener = () => {
     db.ref('Retailers/').once('value', snapshot => {
-      console.log(snapshot);
+      console.log("firebase loaded", snapshot);
       let restaurants = [];
       for (let restaurant in snapshot.val()) {
         let item = snapshot.val()[restaurant].storename
@@ -38,17 +38,23 @@ export default class StoreList extends Component {
       this.setState({
         ...this.state,
         data: restaurants,
-        datacopy: restaurants
+        isLoading: false,
       });
     });
   };
 
   componentDidMount() {
-    console.log(this.allretailers);
-    this.setState({isLoading: false});
+    console.log("MOUNTEDDDDDDD", this.allretailers);
+    this._isMounted = true;
+    this.setState({...this.state, isLoading: false});
+    this.setupFirebaseListener()
   }
 
-  GetFlatListItem(name) {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  itemSelected = (name) => {
     console.log(name);
     this.props.navigation.navigate('Restaurant Info', {
       restaurant: name
@@ -56,14 +62,8 @@ export default class StoreList extends Component {
   }
 
   searchData(text) {
-    const newData = this.state.datacopy.filter(item => {
-      const itemData = item.toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-
     this.setState({
-      data: newData,
+      ...this.state(),
       text: text,
     });
   }
@@ -100,13 +100,17 @@ export default class StoreList extends Component {
         />
 
         <FlatList
-          data={this.state.data}
+          data={this.state.data.filter(item => {
+              const itemData = item.toUpperCase();
+              return itemData.indexOf(this.state.text.toUpperCase()) > -1;
+            })
+          }
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={this.itemSeparator}
           renderItem={({item}) => (
             <Text
               style={styles.row}
-              onPress={this.GetFlatListItem.bind(this, item)}>
+              onPress={() => this.itemSelected(item)}>
               {item}
             </Text>
           )}

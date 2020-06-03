@@ -3,35 +3,33 @@ import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
 const category="FASHION";
-retailerscat2=[];
-
 class BrowseCat2 extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         names: retailerscat1, 
+         names: [], 
       }
 
       this.setupFirebaseListener()
    }
    setupFirebaseListener = () => {
       db
-      .ref('Retailers/')
-      .once('value')
-      .then(function(snapshot){
-            retailers2=[]
-            snapshot.forEach(function(childSnapshot){
-               //var key=childSnapshot.key;
-               var val=childSnapshot.val();
-               //console.log(key)
-               if (val.storetype=='Fashion') {
-                  retailers2.push(val);
+         .ref('Retailers/')
+         .once('value')
+         .then((snapshot) => {
+            let retailers = []
+            snapshot.forEach((childSnapshot) => {
+               var val = childSnapshot.val();
+               if (val.storetype == 'Fashion') {
+                  retailers.push(val);
                }
-               retailerscat2=retailers2;
-               //console.log(retailerscat2);
-               
-      });
-  });
+            });
+
+            this.setState({
+               ...this.state,
+               names: retailers,
+            })
+         });
    }
    render() {
       return (
@@ -45,10 +43,15 @@ class BrowseCat2 extends Component {
                <ScrollView>
                   {
                      this.state.names.map((item, index) => (
-                        <View key = {item.key} style = {styles.item}>
-                           <Text onPress={() => {this.props.navigation.navigate('Restaurant Info', {
-                              restaurant: item.storename
-                           });}}>
+                        <View 
+                           key={item.key}
+                           style={styles.item} >
+                           <Text
+                              onPress={() => {
+                                 this.props.navigation.navigate('Restaurant Info', {
+                                    restaurant: item.storename
+                                 });
+                              }}>
                               {item.storename}
                            </Text>
                         </View>
