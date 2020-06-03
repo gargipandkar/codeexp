@@ -16,17 +16,15 @@ import {
     TouchableOpacity
 } from 'react-native';
 import {Button} from 'react-native-elements';
-import {NavigationContainer} from 'react-navigation';
-import {Firebase} from 'firebase';
 import {db} from './App.js';
 import ShopListItem from './ShopListItem'
 
 type Props = {};
 
 
-export default class Page5 extends Component<Props> {
+export default class retailerUI extends Component<Props> {
     static navigationOptions = {
-        title: 'Page5',
+        title: 'Store Overview',
     }
 
     readUserData = () => {
@@ -78,22 +76,10 @@ export default class Page5 extends Component<Props> {
                         //Setting the number of column
                         numColumns={2}
                         keyExtractor={(item, index) => index.toString()}
-                        height= {350}
+                        height= {450}
                         padding= {10}
                     />
-                <View style={styles.back}>               
-                    <Button
-                        onPress={this._onSearchPressed}
-                        title='Add New Store'
-                        style={styles.buttons}
-                        type= 'clear'
-                    />
-                    <Button
-                        onPress={this._onSearchPressed}
-                        title='Refresh'
-                        style={styles.buttons}
-                        type='clear'
-                    />
+                <View style={styles.back}>
                     <Button
                         onPress={this._onSearchPressed}
                         title='Log Out'

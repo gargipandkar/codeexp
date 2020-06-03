@@ -13,11 +13,22 @@ import {
 
 type Props = {};
 
+function HomeScreen({ navigation }) {
+    return (
+      <Button
+        title="Go"
+        onPress={() =>
+          navigation.navigate('Page4')
+        }
+      />
+    );
+  }
 
 export default class SettingsScreen extends Component<Props> {
     static navigationOptions = {
         title: 'Settings',
     }
+
     render() {
         return (
             <View style={styles.container}>                    
