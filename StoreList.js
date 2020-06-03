@@ -13,37 +13,31 @@ import {
 
 import {db} from './fb.config';
 
+allretailers=[];
+
+db
+.ref('/Restaurant')
+.once('value')
+.then(function (snapshot){
+    snapshot.forEach(function(childSnapshot){
+      //var key=childSnapshot.key;
+      var val=childSnapshot.val();
+      allretailers.push(val);
+      });
+    //this.datacopy=allretailers;
+    //console.log("exist?", this.datacopy);  
+  });
+
 export default class SearchableList extends Component {
   state = {
     isLoading: true,
     text: '',
-    data: [],
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.datacopy = [];
+    data: allretailers
   }
-
-  //readUserData = () => {}
-
+  datacopy=allretailers;
+  
   componentDidMount() {
-    db.ref('/Restaurant')
-      .once('value')
-      .then(function(snapshot) {
-        let allretailers = [];
-        snapshot.forEach(childSnapshot => {
-          //var key=childSnapshot.key;
-          var val = childSnapshot.val();
-          allretailers.push(val);
-        });
-        this.datacopy = allretailers;
-
-        console.log('exist?', this.datacopy);
-      });
-    this.setState({data: this.datacopy, isLoading: false});
-    console.log('data: ', this.state.data, this.datacopy);
+    this.setState({isLoading:false});
   }
 
   GetFlatListItem(name) {
@@ -52,7 +46,7 @@ export default class SearchableList extends Component {
 
   searchData(text) {
     const newData = this.datacopy.filter(item => {
-      const itemData = item.name.toUpperCase();
+      const itemData = item.storename.toUpperCase();
       const textData = text.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
@@ -101,8 +95,8 @@ export default class SearchableList extends Component {
           renderItem={({item}) => (
             <Text
               style={styles.row}
-              onPress={this.GetFlatListItem.bind(this, item.name)}>
-              {item.name}
+              onPress={this.GetFlatListItem.bind(this, item.storename)}>
+              {item.storename}
             </Text>
           )}
           style={{marginTop: 10}}
