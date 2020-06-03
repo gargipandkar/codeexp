@@ -27,11 +27,13 @@ Requires the following peer dependencies installed into local node_module:
 ## How to use?
 Step 1:Select 'I am a retailer' or 'I am a consumer'.
 
+
 If 'I am a retailer' is selected:
 
 Step 2: Sign your store up.
 
-Step 3: If store is already listed, log in to view your store. (Email: b@a.com, Password: )
+Step 3: If store is already listed, log in to view your store. (Email: teststore@ts.com, Password: 123456) 
+
 
 If 'I am a consumer' is selected:
 
