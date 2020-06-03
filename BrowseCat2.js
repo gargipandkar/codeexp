@@ -5,8 +5,6 @@ import { db } from './App';
 const category="FASHION";
 retailerscat2=[];
 
-//console.log(retailerscat2);
-
 class BrowseCat2 extends Component {
    constructor(props) {
       super(props)
@@ -21,13 +19,15 @@ class BrowseCat2 extends Component {
       .ref('Retailers/')
       .once('value')
       .then(function(snapshot){
+            retailers2=[]
             snapshot.forEach(function(childSnapshot){
                //var key=childSnapshot.key;
                var val=childSnapshot.val();
                //console.log(key)
                if (val.storetype=='Fashion') {
-                  retailerscat2.push(val);
+                  retailers2.push(val);
                }
+               retailerscat2=retailers2;
                //console.log(retailerscat2);
                
       });
