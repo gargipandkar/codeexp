@@ -40,6 +40,7 @@ import signUp from './signUp';
 import customerUI from './customerUI';
 import retailerUI from './retailerUI';
 import c_options from './c_options';
+import Welcome from './Welcome';
 import Firebase from 'firebase';
 let config = {
   apiKey: 'AIzaSyCw3L0E-iujZVQpKhjGoPIPnH5bkrTBc9A',
@@ -57,6 +58,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Sign In" component={signIn} />
       <Stack.Screen name="Restaurant Info" component={customerUI} />
       <Stack.Screen name="Options" component={c_options} />
