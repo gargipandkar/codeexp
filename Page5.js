@@ -17,16 +17,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Button} from 'react-native-elements';
+import {NavigationContainer} from 'react-navigation';
+import {Firebase} from 'firebase';
 import {db} from './App.js';
 import ShopListItem from './ShopListItem';
 
 type Props = {};
 
-
-export default class retailerUI extends Component<Props> {
-    static navigationOptions = {
-        title: 'Store Overview',
-    }
+export default class Page5 extends Component<Props> {
+  static navigationOptions = {
+    title: 'Page5',
+  };
 
   readUserData = (props) => {
     db.ref('Retailers/').on('value', snapshot => {
@@ -90,12 +91,51 @@ export default class retailerUI extends Component<Props> {
         );
         
     };
-
-    componentDidMount() {
-        this.readUserData()
-        
-    }
-
+    this.readUserData();
+  }
+  render() {
+    return (
+      <View style={styles.whole}>
+        <Text style={styles.description}>Hello, Retailer!</Text>
+        <Text style={styles.welcome}>Welcome back.</Text>
+        <FlatList
+          data={this.state.restaurants}
+          renderItem={({item}) => (
+            <ShopListItem
+              numberOfPeople={item.value.current}
+              seating={item.value.capacity}
+              name={item.name}
+            />
+          )}
+          //Setting the number of column
+          numColumns={2}
+          keyExtractor={(item, index) => index.toString()}
+          height={350}
+          padding={10}
+        />
+        <View style={styles.back}>
+          <Button
+            onPress={this._onSearchPressed}
+            title="Add New Store"
+            style={styles.buttons}
+            type="clear"
+          />
+          <Button
+            onPress={this._onSearchPressed}
+            title="Refresh"
+            style={styles.buttons}
+            type="clear"
+          />
+          <Button
+            onPress={this._onSearchPressed}
+            title="Log Out"
+            style={styles.buttons}
+            type="clear"
+          />
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

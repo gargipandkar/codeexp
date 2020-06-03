@@ -4,28 +4,25 @@ import React, {Component} from 'react';
 import {Text, View, ImageBackground, StyleSheet} from 'react-native';
 
 class ShopListItem extends Component {
-    constructor(props) {
-        super(props);
-        let backgroundImage={uri: 'https://gdurl.com/Jk9o'}
-        this.state = {
-            numberOfPeople: props.numberOfPeople,
-            backgroundImage: this.getBackgroundImage(props)
-        }
-        
-    }
+  constructor(props) {
+    super(props);
+    let backgroundImage = require('./Resources/Picture1.png');
+    this.state = {
+      numberOfPeople: props.numberOfPeople,
+      backgroundImage: this.getBackgroundImage(props),
+    };
+  }
 
-    getBackgroundImage = (props) => {
-            let check = props.numberOfPeople / props.seating
-            if (check <= 0.5) {
-                return {uri: 'https://gdurl.com/Jk9o'}
-            }
-            else if (check < 0.75 && check > 0.5) {
-                    return {uri: 'https://gdurl.com/Kq4k'}
-            }
-            else {
-                    return {uri: 'https://gdurl.com/yzPU'}
-            }
+  getBackgroundImage = props => {
+    let check = props.numberOfPeople / props.seating;
+    if (check <= 0.5) {
+      return require('./Resources/Picture1.png');
+    } else if (check < 0.75 && check > 0.5) {
+      return require('./Resources/Picture2.png');
+    } else {
+      return require('./Resources/Picture3.png');
     }
+  };
 
   render() {
     return (

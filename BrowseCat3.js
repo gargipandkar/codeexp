@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
-const category="HOUSEHOLD";
+const category="GROCERY";
 retailerscat3=[];
 
 class BrowseCat3 extends Component {
@@ -24,7 +24,7 @@ class BrowseCat3 extends Component {
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
                   //console.log(key)
-                  if (val.storetype=='household') {
+                  if (val.storetype=='Grocery') {
                      retailerscat3.push(val);
                   }
                   //console.log(retailerscat3);
@@ -44,8 +44,8 @@ class BrowseCat3 extends Component {
                <ScrollView>
                   {
                      this.state.names.map((item, index) => (
-                        <View key = {item.name} style = {styles.item}>
-                           <Text onPress={() => console.log(item.name)}>{item.name}</Text>
+                        <View key = {item.key} style = {styles.item}>
+                           <Text onPress={() => console.log(item.storename)}>{item.storename}</Text>
                         </View>
                      ))
                   }
@@ -78,6 +78,6 @@ const styles = StyleSheet.create ({
       margin: 2,
       borderColor: '#2a4944',
       borderWidth: 1,
-      backgroundColor: '#d2f7f1'
+      backgroundColor: '#FFFF'
    }
 })

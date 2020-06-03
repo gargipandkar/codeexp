@@ -87,33 +87,23 @@ export default class signIn extends React.Component {
       )
     }
 
-
     return (
-      <View style={styles.whole}>
-        <View style={styles.form}>
-          <Input
-            placeholder="Enter your email..."
-            label="Email"
-            onChangeText={email => this.setState({email})}
-            value={this.state.email}
-          />
-          <Input
-            placeholder="Enter your password..."
-            label="Password"
-            secureTextEntry
-            onChangeText={password => this.setState({password})}
-            value={this.state.password}
-          />
-          <Button onPress={() => this.onPressSignIn()}>Log In</Button>
-          <Text>{this.state.error}</Text>
-        </View>
-        <View style={styles.noAccount}>
-          <Text style={styles.noAccountText}>
-            Don't have an account?
-          </Text>
-          <Button onPress={() => this.props.navigation.navigate('Sign Up'
-          )}>Sign Up Now</Button>
-        </View>
+      <View style={styles.form}>
+        <Input
+          placeholder="Enter your email..."
+          label="Email"
+          onChangeText={email => this.setState({email})}
+          value={this.state.email}
+        />
+        <Input
+          placeholder="Enter your password..."
+          label="Password"
+          secureTextEntry
+          onChangeText={password => this.setState({password})}
+          value={this.state.password}
+        />
+        <Button onPress={() => this.onPressSignIn()}>Log In</Button>
+        <Text>{this.state.error}</Text>
       </View>
     );
   }
@@ -134,10 +124,4 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
   },
-  noAccount: {
-    alignItems: 'center'
-  },
-  whole: {
-    alignItems: 'stretch'
-  }
 });

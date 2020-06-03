@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput} from 'react-native';
 
-export const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
+const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -41,3 +41,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export {Input};
