@@ -3,7 +3,7 @@ import { Text, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { db } from './App';
 
 const category="FASHION";
-retailerscat1=[];
+retailerscat2=[];
 
 class BrowseCat2 extends Component {
    constructor(props) {
@@ -16,22 +16,22 @@ class BrowseCat2 extends Component {
    }
    setupFirebaseListener = () => {
       db
-         .ref('Retailers/')
-         .once('value')
-         .then(function(snapshot){
+      .ref('Retailers/')
+      .once('value')
+      .then(function(snapshot){
             retailers2=[]
-               snapshot.forEach(function(childSnapshot){
-                  //var key=childSnapshot.key;
-                  var val=childSnapshot.val();
-                  //console.log(key)
-                  if (val.storetype=='Food') {
-                     retailers2.push(val);
-                  }
-                  retailerscat2=retailers2;
-                  //console.log(retailerscat1);
-                  
-               });
-         });
+            snapshot.forEach(function(childSnapshot){
+               //var key=childSnapshot.key;
+               var val=childSnapshot.val();
+               //console.log(key)
+               if (val.storetype=='Fashion') {
+                  retailers2.push(val);
+               }
+               retailerscat2=retailers2;
+               //console.log(retailerscat2);
+               
+      });
+  });
    }
    render() {
       return (

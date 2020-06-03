@@ -23,7 +23,6 @@ class BrowseCat1 extends Component {
                snapshot.forEach(function(childSnapshot){
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
-                  //console.log(key)
                   if (val.storetype=='Food') {
                      retailers1.push(val);
                   }

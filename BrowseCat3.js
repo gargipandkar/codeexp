@@ -24,13 +24,12 @@ class BrowseCat3 extends Component {
                   //var key=childSnapshot.key;
                   var val=childSnapshot.val();
                   //console.log(key)
-                  if (val.storetype=='Food') {
+                  if (val.storetype=='Grocery') {
                      retailers3.push(val);
                   }
                   retailerscat3=retailers3;
-                  //console.log(retailerscat1);
-                  
-               });
+                  //console.log(retailerscat3);
+          
          });
    }
    render() {
