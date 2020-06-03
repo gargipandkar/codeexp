@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   ActivityIndicator,
   Image,
 } from 'react-native';
@@ -16,7 +15,7 @@ import {Button} from 'react-native-elements';
 import {NavigationContainer} from 'react-navigation';
 import {Firebase} from 'firebase';
 import {db} from './App.js';
-import ShopListItem from './ShopListItem'
+import ShopListItem from './ShopListItem';
 
 type Props = {};
 
