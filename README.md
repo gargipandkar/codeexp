@@ -25,8 +25,21 @@ Requires the following peer dependencies installed into local node_module:
 - react-native-elements
 
 ## How to use?
-step by step guide to use your project.
-![alt_text](https://github.com/gargipandkar/codeexp/blob/master/Resources/userguideC.PNG?raw=true)
+Step 1: Select 'I am a retailer' or 'I am a consumer'.
+
+
+**If 'I am a retailer' is selected:**
+
+Step 2: Sign your store up.
+
+Step 3: If store is already listed, log in to view your store. (Email: teststore@ts.com, Password: 123456) 
+
+
+**If 'I am a consumer' is selected:**
+
+Step 2: Search for a store name. For illustration purpose, search for 'teststore'.
+
+Step 3: Select 'teststore' and crowd level will be shown. If crowd level is medium or high, other store recommendation will be shown.
 
 ## Disclaimer 
 It is essential to install React Native CLI instead of Expo CLI. This application was built using React Native CLI and will not be able to guarantee the application will function accordingly if otherwise.
