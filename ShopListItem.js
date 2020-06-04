@@ -26,7 +26,7 @@ class ShopListItem extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'column', margin: 1}}>
+      <View style={{flex: 1, flexDirection: 'column', margin: 1, alignItems: "center"}}>
         <Text style={styles.welcome2}>{this.props.name}</Text>
         <ImageBackground
           source={this.state.backgroundImage}
@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
     width: 150,
     position: 'relative', // because it's parent
     top: 2,
-    left: 20,
     padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
   welcome2: {
     marginTop: 0,
     marginBottom: 10,
-    left: 58,
     fontSize: 18,
     textAlign: 'auto',
     color: '#656565',

@@ -63,21 +63,24 @@ export default class retailerUI extends Component<Props> {
                 <Text style={styles.welcome}>
                     Welcome back.
                 </Text>
-                    <FlatList
-                        data={this.state.restaurants}
-                        renderItem={({ item }) => (
-                            <ShopListItem
-                                numberOfPeople={item.value.current}
-                                seating={item.value.capacity}
-                                name={item.name}
-                            />
-                        )}
-                        //Setting the number of column
-                        numColumns={1}
-                        keyExtractor={(item, index) => index.toString()}
-                        height= {450}
-                        padding= {100}
-                    />
+                <FlatList
+                    data={this.state.restaurants}
+                    renderItem={({ item }) => (
+                      <View style={{padding: 8}}>
+                        <ShopListItem
+                            numberOfPeople={item.value.current}
+                            seating={item.value.capacity}
+                            name={item.name}
+                        />
+                      </View>
+                    )}
+                    //Setting the number of column
+                    numColumns={1}
+                    keyExtractor={(item, index) => index.toString()}
+                    height={650}
+                    width={'100%'}
+                    contentContainerStyle={{alignItems: "center"}}
+                />
                 <View style={styles.back}>
                     <Button
                         onPress={() => this.props.navigation.navigate('Welcome')}
